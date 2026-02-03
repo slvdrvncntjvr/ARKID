@@ -1,0 +1,72 @@
+import { google } from "googleapis";
+
+export async function getGoogleSheetsClient() {
+  const auth = new google.auth.JWT({
+    email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+    key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
+  });
+
+  return google.sheets({ version: "v4", auth });
+}
+
+export interface UserRecord {
+  email: string;
+  id: string;
+  name?: string;
+  department?: string;
+  [key: string]: any;
+}
+
+export async function searchUserByEmail(email: string): Promise<UserRecord | null> {
+  try {
+    const sheets = await getGoogleSheetsClient();
+    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+
+    // Read data from the sheet (adjust range as needed)
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: "Sheet1!A:Z", // Adjust based on your sheet structure
+    });
+
+    const rows = response.data.values;
+    if (!rows || rows.length === 0) {
+      return null;
+    }
+
+    // Assume first row is headers
+    const headers = rows[0].map((h: any) => String(h).toLowerCase());
+    const emailIndex = headers.indexOf("email");
+    const idIndex = headers.indexOf("id");
+
+    if (emailIndex === -1 || idIndex === -1) {
+      throw new Error("Sheet must have 'email' and 'id' columns");
+    }
+
+    // Search for matching email (case-insensitive)
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (row[emailIndex]?.toLowerCase() === email.toLowerCase()) {
+        // Build user record from row data
+        const userRecord: UserRecord = {
+          email: row[emailIndex],
+          id: row[idIndex],
+        };
+
+        // Add other columns dynamically
+        headers.forEach((header, index) => {
+          if (header !== "email" && header !== "id" && row[index]) {
+            userRecord[header] = row[index];
+          }
+        });
+
+        return userRecord;
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error searching Google Sheets:", error);
+    throw error;
+  }
+}
