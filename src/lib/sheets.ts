@@ -70,3 +70,25 @@ export async function searchUserByEmail(email: string): Promise<UserRecord | nul
     throw error;
   }
 }
+
+export function verifyAdmin(username: string, password: string): boolean {
+  // Parse ADMIN_USERS from env (format: "user1:pass1,user2:pass2,user3:pass3")
+  const adminUsers = process.env.ADMIN_USERS || "";
+  
+  if (adminUsers) {
+    const users = adminUsers.split(",").map((user) => {
+      const [u, p] = user.trim().split(":");
+      return { username: u, password: p };
+    });
+
+    return users.some(
+      (user) => user.username === username && user.password === password
+    );
+  }
+
+  // Fallback to single admin from legacy env vars
+  return (
+    username === process.env.ADMIN_USERNAME &&
+    password === process.env.ADMIN_PASSWORD
+  );
+}

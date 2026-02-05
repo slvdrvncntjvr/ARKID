@@ -36,7 +36,7 @@ export default function DashboardClient({ username }: { username: string }) {
       } else {
         setResult(data.user);
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
@@ -133,7 +133,7 @@ export default function DashboardClient({ username }: { username: string }) {
           )}
 
           <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h4 className="text-sm font-semibold text-blue-900 mb-2">ℹ️ How to use</h4>
+            <h4 className="text-sm font-semibold text-blue-900 mb-2">💡 How to use</h4>
             <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
               <li>Enter the user's email address in the search field</li>
               <li>Click Search to query the database</li>
