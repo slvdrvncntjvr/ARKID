@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-50 text-gray-900;
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+@layer base {
+    :root {
+        --background: 180 30% 6%;
+        --foreground: 40 10% 90%;
+        --card: 180 20% 9%;
+        --card-foreground: 40 10% 90%;
+        --popover: 180 20% 9%;
+        --popover-foreground: 40 10% 90%;
+        --primary: 42 70% 55%;
+        --primary-foreground: 180 30% 6%;
+        --secondary: 180 15% 13%;
+        --secondary-foreground: 40 10% 90%;
+        --muted: 180 12% 15%;
+        --muted-foreground: 180 8% 50%;
+        --accent: 155 30% 35%;
+        --accent-foreground: 40 10% 90%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 180 10% 16%;
+        --input: 180 10% 16%;
+        --ring: 42 60% 50%;
+        --chart-1: 180 40% 40%;
+        --chart-2: 155 35% 40%;
+        --chart-3: 42 70% 55%;
+        --chart-4: 30 50% 45%;
+        --chart-5: 200 30% 45%;
+        --radius: 0.625rem;
+        --glow: 42 70% 55%;
+        --warm: 42 70% 55%;
+        --teal: 180 30% 20%;
+        --stone: 180 5% 40%;
+        --wood: 30 25% 30%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
 }
