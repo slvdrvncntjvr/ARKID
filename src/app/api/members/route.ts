@@ -13,9 +13,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const member = await searchMember(query);
+    const members = await searchMember(query);
 
-    if (!member) {
+    if (members.length === 0) {
       return NextResponse.json(
         { found: false, message: "No member found matching your search" },
         { status: 404 },
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       found: true,
-      data: member,
+      data: members,
     });
   } catch (error: any) {
     console.error("Error in member search API:", error);

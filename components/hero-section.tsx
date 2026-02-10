@@ -25,7 +25,7 @@ export function HeroSection() {
       {/* background hero*/}
       <div className="absolute inset-0">
         <Image
-          src="/ark-island.png"
+          src="/ark.png"
           alt="ARK island map - a top-down illustrated pirate island with ships, buildings, and a treasure trail"
           fill
           className="object-cover object-center"
