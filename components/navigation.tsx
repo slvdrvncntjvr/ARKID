@@ -8,8 +8,11 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "ID Finder", href: "#id-finder" },
+  { label: "Games", href: "#projects" },
+  { label: "Events", href: "#events" },
+  { label: "Workshops", href: "#workshops" },
+  { label: "Team", href: "#team" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navigation() {

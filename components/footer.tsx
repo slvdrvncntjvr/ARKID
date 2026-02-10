@@ -13,25 +13,36 @@ export function Footer() {
         aria-hidden="true"
       />
 
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 md:flex-row">
-        {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <Image
-            src="/ark-logo.png"
-            alt=""
-            width={24}
-            height={17}
-            className="rounded-sm object-contain"
-          />
-          <span className="font-display text-sm font-semibold text-foreground">
-            ARK
-          </span>
-        </div>
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/ark-logo.png"
+              alt=""
+              width={24}
+              height={17}
+              className="rounded-sm object-contain"
+            />
+            <span className="font-display text-sm font-semibold text-foreground">
+              ARK
+            </span>
+          </div>
 
-        <p className="text-xs text-muted-foreground">
-          {"gawa ni franz. "}
-          {new Date().getFullYear()}
-        </p>
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} ARK Gaming. All rights reserved. Keep
+            mining.
+          </p>
+
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <a href="#" className="hover:text-primary transition-colors">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-primary transition-colors">
+              Terms
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
