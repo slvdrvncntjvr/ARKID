@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
+  { label: "Mission & Vision", href: "#mission-vision" },
+  { label: "Heroes", href: "#heroes" },
   { label: "Projects", href: "#projects" },
   { label: "ID Finder", href: "#id-finder" },
 ];
@@ -16,6 +18,7 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -46,14 +49,16 @@ export function Navigation() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
       <nav
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          "flex items-center gap-1 rounded-full border px-2 py-1.5 backdrop-blur-xl transition-all duration-500",
+          "flex items-center gap-1 rounded-full border px-2 py-1.5 backdrop-blur-xl transition-all duration-500 ease-in-out",
           scrolled
             ? "border-border/60 bg-card/80 shadow-lg shadow-background/30"
             : "border-border/30 bg-card/40",
         )}
       >
-        {/* icon */}
+        {/* Logo */}
         <a
           href="#home"
           className="mr-1 flex items-center gap-2 rounded-full px-3 py-1 font-display text-sm font-bold tracking-tight text-foreground transition-colors hover:text-primary"
@@ -68,8 +73,13 @@ export function Navigation() {
           ARK
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-0.5 md:flex">
+        {/* Desktop links - expand on hover */}
+        <div
+          className={cn(
+            "hidden items-center gap-0.5 overflow-hidden transition-all duration-500 ease-in-out md:flex",
+            isHovered ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0",
+          )}
+        >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.replace("#", "");
             return (
@@ -77,7 +87,7 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3.5 py-1.5 text-sm transition-all duration-200",
+                  "whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm transition-all duration-200",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground",

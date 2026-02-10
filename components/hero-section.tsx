@@ -25,7 +25,7 @@ export function HeroSection() {
       {/* background hero*/}
       <div className="absolute inset-0">
         <Image
-          src="/ark-island.png"
+          src="/ark.png"
           alt="ARK island map - a top-down illustrated pirate island with ships, buildings, and a treasure trail"
           fill
           className="object-cover object-center"
@@ -58,14 +58,22 @@ export function HeroSection() {
           className={`flex flex-col items-center gap-6 text-center transition-all duration-1000 ${loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
         >
           {/* title */}
-          <h1 className="font-display text-5xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             <span className="text-balance">
-              Welcome to{" "}
+              <span
+                className="text-white"
+                style={{
+                  textShadow:
+                    "0 0 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 0, 0, 0.7), 0 4px 8px rgba(0, 0, 0, 0.8), -3px -3px 0 rgba(0, 0, 0, 0.5), 3px -3px 0 rgba(0, 0, 0, 0.5), -3px 3px 0 rgba(0, 0, 0, 0.5), 3px 3px 0 rgba(0, 0, 0, 0.5)",
+                }}
+              >
+                Welcome to{" "}
+              </span>
               <span
                 className="text-primary"
                 style={{
                   textShadow:
-                    "0 0 20px hsl(var(--primary) / 0.5), -2px -2px 0 hsl(var(--background)), 2px -2px 0 hsl(var(--background)), -2px 2px 0 hsl(var(--background)), 2px 2px 0 hsl(var(--background))",
+                    "0 0 40px hsl(var(--primary) / 0.8), 0 0 80px hsl(var(--primary) / 0.5), 0 4px 12px rgba(0, 0, 0, 0.9), -4px -4px 0 rgba(0, 0, 0, 0.7), 4px -4px 0 rgba(0, 0, 0, 0.7), -4px 4px 0 rgba(0, 0, 0, 0.7), 4px 4px 0 rgba(0, 0, 0, 0.7)",
                 }}
               >
                 ARK
@@ -74,8 +82,14 @@ export function HeroSection() {
           </h1>
 
           {/* subtitle */}
-          <p className="max-w-lg text-base leading-relaxed text-foreground/70 sm:text-lg">
-            subheading to di ko alam ilalagay? placeholder lang to.
+          <p 
+            className="max-w-lg text-base font-semibold leading-relaxed text-white sm:text-lg"
+            style={{
+              textShadow:
+                "0 0 20px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.8), -2px -2px 0 rgba(0, 0, 0, 0.6), 2px -2px 0 rgba(0, 0, 0, 0.6), -2px 2px 0 rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0, 0, 0, 0.6)",
+            }}
+          >
+            Embark on epic quests, forge legendary games, and join the ultimate developer guild
           </p>
 
           {/* buttons */}
