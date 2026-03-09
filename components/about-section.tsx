@@ -64,20 +64,20 @@ export function AboutSection() {
         {/* Title with game-style emphasis */}
         <h2 className="mb-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
           <span className="text-balance">
-            Founded By{" "}
+            Where{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
-                Carl
+                Students
               </span>
               <span 
                 className="absolute inset-0 bg-yellow-400/20 blur-xl" 
                 aria-hidden="true"
               />
             </span>
-            {" "}And{" "}
+            {" "}Become{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
-                Vincent The Great
+                Legends
               </span>
               <span 
                 className="absolute inset-0 bg-yellow-400/20 blur-xl" 
@@ -92,15 +92,16 @@ export function AboutSection() {
           <div className="h-4 w-4 rounded border border-accent/40 bg-accent/10 flex items-center justify-center">
             <div className="h-2 w-2 bg-accent" style={{ clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" }} />
           </div>
-          <span className="font-medium">Guild Founders</span>
+          <span className="font-medium">Student-Led • Future-Forward</span>
         </div>
 
-        <p className="mb-16 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          ARK is a student-led guild proving that game development is more than
-          just a hobby—it's a path to{" "}
-          <span className="font-semibold text-foreground">real skills</span>,{" "}
-          <span className="font-semibold text-foreground">creative impact</span>, and{" "}
-          <span className="font-semibold text-foreground">future opportunities</span>.
+        <p className="mb-16 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          ARK (AcademiTech Research and Knowledge) is a{" "}
+          <span className="font-semibold text-foreground">Student-Led</span>, future-forward organization that equips individuals with the mindset, systems, and skills to thrive in the modern world. By blending{" "}
+          <span className="font-semibold text-foreground">technology</span>,{" "}
+          <span className="font-semibold text-foreground">learning science</span>,{" "}
+          <span className="font-semibold text-foreground">gamification</span>, and{" "}
+          <span className="font-semibold text-foreground">real-world projects</span>, ARK transforms students into innovators, builders, and leaders ready for the challenge of tomorrow.
         </p>
 
         {/* Class selection grid */}

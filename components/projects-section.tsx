@@ -1,47 +1,165 @@
 "use client";
 
-import { ArrowUpRight, Calendar, Users, Zap } from "lucide-react";
+import { ArrowUpRight, Calendar, Users, Zap, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "ARK Guildforge Game Jam",
+    title: "Global Hackathon",
+    type: "Hackathon",
+    description: "ARK's inaugural international hackathon participation, showcasing our guild's talent on a global stage.",
+    tags: ["International", "Competition"],
+    date: "August 2024",
+    participants: "4",
+    gradient: "from-purple-500/20 to-indigo-500/20",
+    accentColor: "purple",
+    links: []
+  },
+  {
+    title: "Philippine Tech Career Fest",
+    type: "Conference",
+    description: "Guild members explored career opportunities and networked with tech industry leaders across the Philippines.",
+    tags: ["Career", "Networking"],
+    date: "March 29, 2025",
+    participants: "10",
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    accentColor: "blue",
+    links: [{ label: "Event Post", url: "https://web.facebook.com/share/p/1AtfZorwAE/" }]
+  },
+  {
+    title: "Interest Check: The Gates Open",
+    type: "Recruitment",
+    description: "The ARK opened its gates seeking students ready to explore, learn, and build beyond the screen.",
+    tags: ["Recruitment", "Community"],
+    date: "July 25, 2026",
+    participants: "50+",
+    gradient: "from-amber-500/20 to-yellow-500/20",
+    accentColor: "amber",
+    links: [{ label: "Announcement", url: "https://web.facebook.com/share/p/1FbViQv7Jc/" }]
+  },
+  {
+    title: "DEVCON: CHECKMATE",
     type: "Game Jam",
-    description: "Eight Teams battle fliptop zaito",
-    tags: ["Hackathon", "Game Jam"],
-    year: "2024",
-    participants: "40+",
-    gradient: "from-violet-500/20 to-fuchsia-500/20",
-    accentColor: "violet"
+    description: "Team Checkmate's strategic masterpiece created during Game On! Game Jam Manila 2025.",
+    tags: ["Game Jam", "DEVCON"],
+    date: "August 2025",
+    participants: "5",
+    gradient: "from-red-500/20 to-orange-500/20",
+    accentColor: "red",
+    links: [
+      { label: "Trailer", url: "https://web.facebook.com/share/v/1CCxJD7oZq/" },
+      { label: "Play Game", url: "https://jokumaaa.itch.io/checkmate" }
+    ]
   },
   {
-    title: "ARK CCIS Booth",
-    type: "Booth",
-    description: "CCIS Week Booth",
-    tags: ["Community", "Partnership"],
-    year: "2024",
-    participants: "200+",
-    gradient: "from-cyan-500/20 to-blue-500/20",
-    accentColor: "cyan"
+    title: "DEVCON: BANGUNGOT",
+    type: "Game Jam",
+    description: "A haunting Filipino folklore-inspired game showcasing cultural storytelling through interactive media.",
+    tags: ["Game Jam", "DEVCON"],
+    date: "August 2025",
+    participants: "4",
+    gradient: "from-violet-500/20 to-purple-500/20",
+    accentColor: "violet",
+    links: [
+      { label: "Trailer", url: "https://web.facebook.com/share/v/1DNbnCA2me/" },
+      { label: "Play Game", url: "https://leeprince.itch.io/bangungot" }
+    ]
   },
   {
-    title: "tiktok ni viv at marky and friends",
-    type: "Content",
-    description: "Behind the scenes content creation series",
-    tags: ["Social", "Content"],
-    year: "2024",
-    participants: "15+",
-    gradient: "from-pink-500/20 to-rose-500/20",
-    accentColor: "pink"
-  },
-  {
-    title: "Advanced Game Workshop",
+    title: "DOST NCR: POWERUP",
     type: "Workshop",
-    description: "Intensive 3-day game development bootcamp",
-    tags: ["Education", "Skills"],
-    year: "2024",
+    description: "Intensive tech skills workshop powered by DOST NCR, elevating our guild's technical capabilities.",
+    tags: ["Workshop", "Partnership"],
+    date: "Sept. 13-14, 2025",
+    participants: "20+",
+    gradient: "from-green-500/20 to-teal-500/20",
+    accentColor: "green",
+    links: [{ label: "Event Recap", url: "https://web.facebook.com/share/p/15d1z5kprSr/" }]
+  },
+  {
+    title: "YGG Play Summit 2025",
+    type: "Conference",
+    description: "ARK represented at Southeast Asia's premier gaming summit, connecting with industry pioneers.",
+    tags: ["Gaming", "Summit"],
+    date: "November 2025",
+    participants: "10",
+    gradient: "from-pink-500/20 to-rose-500/20",
+    accentColor: "pink",
+    links: [
+      { label: "Event Post", url: "https://web.facebook.com/share/p/14TpbwR7xcV/" },
+      { label: "Highlights", url: "https://web.facebook.com/share/v/14VAZ1FqqLe/" }
+    ]
+  },
+  {
+    title: "ARK Onboarding",
+    type: "Workshop",
+    description: "New members welcomed into the guild through intensive orientation and team-building activities.",
+    tags: ["Community", "Training"],
+    date: "November 15, 2025",
     participants: "30+",
-    gradient: "from-amber-500/20 to-orange-500/20",
-    accentColor: "amber"
+    gradient: "from-cyan-500/20 to-blue-500/20",
+    accentColor: "cyan",
+    links: [
+      { label: "Photos", url: "https://web.facebook.com/share/p/1AmtYckJ3c/" },
+      { label: "Video", url: "https://web.facebook.com/share/v/171qEFvP3X/" }
+    ]
+  },
+  {
+    title: "DEVCON Game Jam Finals",
+    type: "Finals",
+    description: "Team Bangungot advanced to the national finals, representing ARK among the Philippines' best.",
+    tags: ["Competition", "Finals"],
+    date: "2025",
+    participants: "4",
+    gradient: "from-orange-500/20 to-amber-500/20",
+    accentColor: "orange",
+    links: []
+  },
+  {
+    title: '"Take One, Leave the Rest" Game Jam',
+    type: "Game Jam",
+    description: "ARK-hosted game jam during CCIS Week challenging students to rapid-prototype creative game concepts.",
+    tags: ["Game Jam", "CCIS Week"],
+    date: "December 11, 2025",
+    participants: "40+",
+    gradient: "from-indigo-500/20 to-violet-500/20",
+    accentColor: "indigo",
+    links: [
+      { label: "Event Details", url: "https://web.facebook.com/share/p/1TL7fzL1zo/" },
+      { label: "Winners", url: "https://web.facebook.com/share/p/1DX3YrG7jj/" }
+    ]
+  },
+  {
+    title: "CCIS Week Booth",
+    type: "Booth",
+    description: "Interactive booth showcasing ARK's projects, games, and recruitment",
+    tags: ["Exhibition", "CCIS Week"],
+    date: "December 12, 2025",
+    participants: "15+",
+    gradient: "from-teal-500/20 to-green-500/20",
+    accentColor: "teal",
+    links: [{ label: "Booth Photos", url: "https://web.facebook.com/share/p/17ybfTT1iV/" }]
+  },
+  {
+    title: "AWS Partnership",
+    type: "Partnership",
+    description: "Strategic partnership with Amazon Web Services empowering ARK with cloud infrastructure and resources.",
+    tags: ["Partnership", "AWS"],
+    date: "2025",
+    participants: "Guild",
+    gradient: "from-yellow-500/20 to-orange-500/20",
+    accentColor: "yellow",
+    links: [{ label: "Announcement", url: "https://web.facebook.com/share/p/18Jni3jVmk/" }]
+  },
+  {
+    title: "Technology Workshop Series",
+    type: "Workshop",
+    description: "Ongoing series of hands-on workshops covering cutting-edge technologies and development practices.",
+    tags: ["Workshop", "Education"],
+    date: "February 18, 2026 →",
+    participants: "Ongoing",
+    gradient: "from-blue-500/20 to-purple-500/20",
+    accentColor: "blue",
+    links: []
   },
 ];
 
@@ -87,11 +205,11 @@ export function ProjectsSection() {
           </div>
 
           <h2 className="mb-6 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            <span className="text-balance">What We've Been Building</span>
+            <span className="text-balance">The Tower We Raise</span>
           </h2>
 
-          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-            From game jams to community events, explore the projects that bring our guild together.
+          <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            We don't settle for 'done.' We aim for 'unforgettable.' Journey through the collection of work that shifted our world's axis.
           </p>
         </div>
 
@@ -174,16 +292,16 @@ export function ProjectsSection() {
                   <div className="mb-6 flex items-center gap-4 text-xs text-muted-foreground">
                     <div className="flex items-center gap-1.5">
                       <Calendar size={14} className="text-accent" />
-                      <span>{project.year}</span>
+                      <span>{project.date}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Users size={14} className="text-accent" />
-                      <span>{project.participants} people</span>
+                      <span>{project.participants}</span>
                     </div>
                   </div>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
@@ -193,6 +311,24 @@ export function ProjectsSection() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Links */}
+                  {project.links && project.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-border/30">
+                      {project.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-accent/20 bg-accent/5 px-3 py-1.5 text-xs font-medium text-accent transition-all duration-300 hover:border-accent/40 hover:bg-accent/10 hover:scale-105"
+                        >
+                          <ExternalLink size={12} />
+                          <span>{link.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-transparent via-accent to-transparent transition-all duration-700 group-hover:w-full" />
