@@ -1,9 +1,23 @@
 import { google, sheets_v4 } from "googleapis";
 
+function getRequiredEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value;
+}
+
 export async function getGoogleSheetsClient() {
+  const clientEmail = getRequiredEnv("GOOGLE_SHEETS_CLIENT_EMAIL");
+  const privateKey = getRequiredEnv("GOOGLE_SHEETS_PRIVATE_KEY").replace(
+    /\\n/g,
+    "\n",
+  );
+
   const auth = new google.auth.JWT({
-    email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-    key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\n/g, "\n"),
+    email: clientEmail,
+    key: privateKey,
     scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
   });
 
@@ -57,7 +71,7 @@ export async function searchUserByEmail(
 ): Promise<UserRecord | null> {
   try {
     const sheets = await getGoogleSheetsClient();
-    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
+    const spreadsheetId = getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID");
 
     // Get all tabs and search through each one
     const sheetNames = await getAllSheetNames(sheets, spreadsheetId);
@@ -113,7 +127,7 @@ export async function searchMemberById(
 ): Promise<MemberRecord | null> {
   try {
     const sheets = await getGoogleSheetsClient();
-    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
+    const spreadsheetId = getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID");
 
     // Get all tabs and search through each one
     const sheetNames = await getAllSheetNames(sheets, spreadsheetId);
@@ -166,7 +180,7 @@ export async function searchMemberById(
 export async function searchMember(query: string): Promise<MemberRecord[]> {
   try {
     const sheets = await getGoogleSheetsClient();
-    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
+    const spreadsheetId = getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID");
 
     // Get all tabs and search through each one
     const sheetNames = await getAllSheetNames(sheets, spreadsheetId);

@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowUpRight, Calendar, Users, ExternalLink } from "lucide-react";
 
 type Project = {
   title: string;
   type: string;
   description: string;
+  image?: string;
+  imageAlt?: string;
   tags: string[];
   date: string;
   participants: string;
@@ -59,6 +62,8 @@ const projects: Project[] = [
     type: "Game Jam",
     description:
       "ARK-hosted game jam during CCIS Week challenging students to rapid-prototype creative game concepts.",
+    image: "/projects/take-one-1.jpg",
+    imageAlt: "ARK members gathered during the Take One, Leave the Rest game jam.",
     tags: ["Game Jam", "CCIS Week"],
     date: "December 11, 2025",
     participants: "40+",
@@ -68,6 +73,7 @@ const projects: Project[] = [
         url: "https://web.facebook.com/share/p/1TL7fzL1zo/",
       },
       { label: "Winners", url: "https://facebook.com/share/p/1DX3YrG7jj/" },
+      { label: "Event Photo 2", url: "/projects/take-one-2.jpg" },
     ],
   },
   {
@@ -201,6 +207,18 @@ const INITIAL_COUNT = 4;
 function ProjectCard({ project }: { project: Project }) {
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-card/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[5px] hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
+      {project.image && (
+        <div className="mb-5 overflow-hidden rounded-xl border border-border/50 bg-black/20">
+          <Image
+            src={project.image}
+            alt={project.imageAlt || `${project.title} photo`}
+            width={1200}
+            height={675}
+            className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      )}
+
       {/* top-edge highlight */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-[60%] -translate-x-1/2 opacity-40 transition-opacity duration-300 group-hover:opacity-100"
