@@ -87,13 +87,13 @@ export function MissionVisionSection() {
               </h4>
 
               <p className="mb-6 text-l leading-relaxed text-muted-foreground">
-                At ARK (Academitech Research and Knowledge), our mission is to
+                At ARK (AcademiTech Research and Knowledge), our mission is to
                 reimagine learning by turning study, creation, and collaboration
                 into a gamified journey. We empower students to grow
                 academically, creatively, and professionally through structured
                 challenges, real-world projects, and community-driven support.
-                Preparing them to thrive in both the tech industry and the
-                Digital Age.
+                This prepares them to thrive in both the tech industry and the
+                digital age.
               </p>
 
               <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />

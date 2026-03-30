@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { Gamepad2, Users, Rocket } from "lucide-react";
 
 const stats = [
-  { icon: Users, label: "Members", value: "67" },
-  { icon: Gamepad2, label: "Projects", value: "69" },
-  { icon: Rocket, label: "Game Jams", value: "911" },
+  { icon: Users, label: "Members", value: "500+" },
+  { icon: Gamepad2, label: "Projects", value: "13+" },
+  { icon: Rocket, label: "Game Jams", value: "3+" },
 ];
 
 export function HeroSection() {
