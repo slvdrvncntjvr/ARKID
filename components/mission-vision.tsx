@@ -156,13 +156,11 @@ export function MissionVisionSection() {
                 Primary Directive
               </h3>
               <h4 className="mb-4 font-display text-2xl font-bold text-foreground">
-                Forge the Future
+                Our Mission
               </h4>
 
               <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                To cultivate a thriving community of student game developers by providing
-                hands-on learning, collaborative projects, and real-world exposure—transforming
-                passion into professional-grade craft.
+                At ARK (Academitech Research and Knowledge), our mission is to reimagine learning by turning study, creation, and collaboration into a gamified journey. We empower students to grow academically, creatively, and professionally through structured challenges, real-world projects, and community-driven support. Preparing them to thrive in both the tech industry and the Digital Age.
               </p>
 
               <div className="space-y-3">
@@ -222,13 +220,11 @@ export function MissionVisionSection() {
                 End-Game Goal
               </h3>
               <h4 className="mb-4 font-display text-2xl font-bold text-foreground">
-                Lead the Realm
+                Our Vision
               </h4>
 
               <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                To become the Philippines&apos; premier student game development guild—recognized
-                for producing industry-ready developers, impactful games, and a legacy of
-                creative excellence that echoes beyond the campus walls.
+                To become a leading student-driven community that transforms the way students learn and create by integrating gamified systems, a collaborative environment, and real-world projects. We aim to empower future innovators, leaders, and creators with the skills, mindset, and support they need to thrive academically, professionally, and socially.
               </p>
 
               <div className="space-y-3">

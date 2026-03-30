@@ -5,84 +5,57 @@ import Image from "next/image";
 
 const heroes = [
   {
-    name: "Carl Chacon",
-    role: "Guild Master",
+    name: "Mel Carl A. Chacon",
+    role: "Visionary / Guildmaster",
     tag: "CEO",
-    description: "Visionary founder who rallied students and turned a spark of passion into a full-blown guild.",
+    description: "The guiding force of ARK, charting its grand design and leading the guild toward bold quests and uncharted realms.",
     rune: "⚔️",
     rank: "S",
     photo: null,
   },
   {
-    name: "Vincent",
-    role: "Co-Founder",
-    tag: "The Great",
-    description: "The strategic mind behind ARK's foundations—co-architect of everything the guild stands for.",
+    name: "Christian Joseph M. Delos Santos",
+    role: "Executor",
+    tag: "COO",
+    description: "Master of order and execution, ensuring every mission, quest, and venture unfolds with precision and valor.",
+    rune: "⚙️",
+    rank: "S",
+    photo: null,
+  },
+  {
+    name: "Salvador Vincent R. Javier",
+    role: "Navigator",
+    tag: "External",
+    description: "The bridge beyond the walls. He forges alliances, strengthens partnerships, and represents ARK with honor in every external undertaking.",
     rune: "🛡️",
     rank: "S",
     photo: null,
   },
   {
-    name: "Precious Grace Deborah Manucom",
-    role: "UI/UX Lead",
-    tag: "Artisan",
-    description: "Crafts the visual language of ARK—every pixel placed with intent, every screen a story.",
-    rune: "🎨",
-    rank: "A",
-    photo: null,
-  },
-  {
-    name: "Lead Name",
-    role: "Technical Lead",
-    tag: "Architect",
-    description: "Masters the art of code architecture—building scalable systems that power ARK's vision.",
-    rune: "⚙️",
-    rank: "A",
-    photo: null,
-  },
-  {
-    name: "Lead Name",
-    role: "Creative Lead",
-    tag: "Storyteller",
-    description: "Weaves narratives into every project—turning code and pixels into memorable experiences.",
-    rune: "📖",
-    rank: "A",
-    photo: null,
-  },
-  {
-    name: "Lead Name",
-    role: "Community Lead",
-    tag: "Unifier",
-    description: "The heart of the guild—fostering connections and keeping the community spirit alive.",
+    name: "Joshua Kurt M. Manzano",
+    role: "Unifier / Warden",
+    tag: "Internal",
+    description: "Guardian of the guild's spirit, fostering unity, harmony, and steadfast coordination within ARK's stronghold.",
     rune: "💫",
-    rank: "B",
+    rank: "S",
     photo: null,
   },
   {
-    name: "Lead Name",
-    role: "Game Dev Lead",
-    tag: "Innovator",
-    description: "Pushes boundaries in game development—transforming wild ideas into playable realities.",
-    rune: "🎮",
+    name: "Dean Benedict Gomez",
+    role: "Fortunekeeper / Treasurer",
+    tag: "Finance",
+    description: "The vigilant steward of ARK's treasures, safeguarding resources and ensuring the guild thrives in every conquest.",
+    rune: "💰",
     rank: "A",
     photo: null,
   },
   {
-    name: "Lead Name",
-    role: "Marketing Lead",
-    tag: "Herald",
-    description: "Spreads the word of ARK's achievements—amplifying our voice across the digital realm.",
-    rune: "📢",
-    rank: "B",
-    photo: null,
-  },
-  {
-    name: "Lead Name",
-    role: "Operations Lead",
-    tag: "Overseer",
-    description: "Keeps the gears turning smoothly—managing logistics so the guild can focus on creating.",
-    rune: "⚡",
-    rank: "B",
+    name: "Juan Miguel Nacubuan",
+    role: "Artificer",
+    tag: "Technology",
+    description: "Master of runes and systems, crafting the digital foundations that bring ARK's bold ideas to life.",
+    rune: "🔧",
+    rank: "A",
     photo: null,
   },
 ];
@@ -248,17 +221,17 @@ export function HeroesSection() {
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
             <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Party Members
+              Meet The Heroes
             </span>
           </div>
           <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
         </div>
 
         <h2 className="mb-3 font-display text-4xl font-black tracking-tight text-foreground md:text-6xl">
-          Meet the{" "}
+          The{" "}
           <span className="relative inline-block">
             <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
-              Heroes
+              Council of ARK
             </span>
             <span
               className="pointer-events-none absolute inset-0 blur-2xl"
@@ -269,7 +242,7 @@ export function HeroesSection() {
         </h2>
 
         <p className="mb-16 font-mono text-sm text-muted-foreground/50">
-          // The guild&apos;s core party — each member a class of their own
+          // The Vanguard of ARK — Masters of the Guild
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
