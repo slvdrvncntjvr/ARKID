@@ -9,7 +9,7 @@ const heroes = [
     description:
       "The guiding force of ARK, charting its grand design and leading the guild toward bold quests and uncharted realms.",
     rune: "⚔️",
-    photo: "/heroes/chacon.png",
+    photo: "/heroes/Chacon.png",
   },
   {
     name: "Joshua Kurt M. Manzano",
@@ -17,7 +17,7 @@ const heroes = [
     description:
       "Guardian of the guild's spirit, fostering unity, harmony, and steadfast coordination within ARK's stronghold.",
     rune: "💫",
-    photo: "/heroes/manzano.png",
+    photo: "/heroes/Manzano.png",
   },
   {
     name: "Salvador Vincent R. Javier",
@@ -25,7 +25,7 @@ const heroes = [
     description:
       "The bridge beyond the walls. He forges alliances, strengthens partnerships, and represents ARK with honor in every external undertaking.",
     rune: "🛡️",
-    photo: "/heroes/javier.png",
+    photo: "/heroes/Javier.png",
   },
   {
     name: "Christian Joseph M. Delos Santos",
@@ -33,7 +33,7 @@ const heroes = [
     description:
       "Master of order and execution, ensuring every mission, quest, and venture unfolds with precision and valor.",
     rune: "⚙️",
-    photo: "/heroes/cj.png",
+    photo: "/heroes/Cj.png",
   },
   {
     name: "Juan Miguel Nacubuan",
@@ -41,7 +41,7 @@ const heroes = [
     description:
       "Master of runes and systems, crafting the digital foundations that bring ARK's bold ideas to life.",
     rune: "🔧",
-    photo: "/heroes/nacubuan.png",
+    photo: "/heroes/Nacubuan.png",
   },
   {
     name: "Dean Benedict Gomez",
@@ -49,7 +49,7 @@ const heroes = [
     description:
       "Vigilant steward of ARK's treasures, ensuring the guild thrives in every conquest.",
     rune: "💰",
-    photo: "/heroes/gomez.png",
+    photo: "/heroes/Gomez.png",
   },
 ];
 
