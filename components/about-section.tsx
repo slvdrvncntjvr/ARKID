@@ -1,40 +1,43 @@
 import type { LucideIcon } from "lucide-react";
 import { Code2, Gamepad2, Music, Palette } from "lucide-react";
 
-const disciplines: { 
-  title: string; 
-  description: string; 
+const disciplines: {
+  title: string;
+  description: string;
   icon: LucideIcon;
   level: string;
   stat: string;
 }[] = [
   {
     title: "Programming",
-    description: "From game logic to shaders, we write the code that brings worlds to life.",
+    description:
+      "From game logic to shaders, we write the code that brings worlds to life.",
     icon: Code2,
     level: "Core System",
-    stat: "Logic + Performance"
+    stat: "Logic + Performance",
   },
   {
     title: "Art & Design",
     description: "2D sprites, 3D models, UI/UX. Every pixel tells a story.",
     icon: Palette,
     level: "Visual Layer",
-    stat: "Aesthetics + Clarity"
+    stat: "Aesthetics + Clarity",
   },
   {
     title: "Game Design",
-    description: "Crafting mechanics, levels, and systems that keep players coming back.",
+    description:
+      "Crafting mechanics, levels, and systems that keep players coming back.",
     icon: Gamepad2,
     level: "Experience Engine",
-    stat: "Engagement + Balance"
+    stat: "Engagement + Balance",
   },
   {
     title: "Audio",
-    description: "Sound effects, music, and atmosphere that make games feel real.",
+    description:
+      "Sound effects, music, and atmosphere that make games feel real.",
     icon: Music,
     level: "Immersion Module",
-    stat: "Mood + Feedback"
+    stat: "Mood + Feedback",
   },
 ];
 
@@ -47,7 +50,7 @@ export function AboutSection() {
         style={{
           background:
             "linear-gradient(90deg, transparent, hsl(42 70% 55% / 0.3), transparent)",
-          boxShadow: "0 0 20px hsl(42 70% 55% / 0.15)"
+          boxShadow: "0 0 20px hsl(42 70% 55% / 0.15)",
         }}
         aria-hidden="true"
       />
@@ -67,41 +70,42 @@ export function AboutSection() {
             Where{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
-                Students
+                Visions
               </span>
-              <span 
-                className="absolute inset-0 bg-yellow-400/20 blur-xl" 
+              <span
+                className="absolute inset-0 bg-yellow-400/20 blur-xl"
                 aria-hidden="true"
               />
-            </span>
-            {" "}Become{" "}
+            </span>{" "}
+            Become{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
-                Legends
+                Reality
               </span>
-              <span 
-                className="absolute inset-0 bg-yellow-400/20 blur-xl" 
+              <span
+                className="absolute inset-0 bg-yellow-400/20 blur-xl"
                 aria-hidden="true"
               />
             </span>
           </span>
         </h2>
 
-        {/* Achievement-style subtitle */}
-        <div className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground">
-          <div className="h-4 w-4 rounded border border-accent/40 bg-accent/10 flex items-center justify-center">
-            <div className="h-2 w-2 bg-accent" style={{ clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" }} />
-          </div>
-          <span className="font-medium">Student-Led • Future-Forward</span>
-        </div>
-
         <p className="mb-16 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           ARK (AcademiTech Research and Knowledge) is a{" "}
-          <span className="font-semibold text-foreground">Student-Led</span>, future-forward organization that equips individuals with the mindset, systems, and skills to thrive in the modern world. By blending{" "}
+          <span className="font-semibold text-foreground">Student-Led</span>,
+          future-forward organization that equips individuals with the mindset,
+          systems, and skills to thrive in the modern world. By blending{" "}
           <span className="font-semibold text-foreground">technology</span>,{" "}
-          <span className="font-semibold text-foreground">learning science</span>,{" "}
-          <span className="font-semibold text-foreground">gamification</span>, and{" "}
-          <span className="font-semibold text-foreground">real-world projects</span>, ARK transforms students into innovators, builders, and leaders ready for the challenge of tomorrow.
+          <span className="font-semibold text-foreground">
+            learning science
+          </span>
+          , <span className="font-semibold text-foreground">gamification</span>,
+          and{" "}
+          <span className="font-semibold text-foreground">
+            real-world projects
+          </span>
+          , ARK transforms students into innovators, builders, and leaders ready
+          for the challenge of tomorrow.
         </p>
 
         {/* Class selection grid */}
@@ -113,7 +117,7 @@ export function AboutSection() {
             </p>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           </div>
-          
+
           <div className="grid gap-4 pb-2 sm:grid-cols-2">
             {disciplines.map((discipline, index) => {
               const Icon = discipline.icon;
@@ -122,7 +126,7 @@ export function AboutSection() {
                   key={discipline.title}
                   className="group relative flex flex-col overflow-hidden rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:bg-card/80"
                   style={{
-                    animationDelay: `${index * 100}ms`
+                    animationDelay: `${index * 100}ms`,
                   }}
                 >
                   {/* Animated corner accent */}
@@ -131,14 +135,15 @@ export function AboutSection() {
                   </div>
 
                   {/* Hover glow effect */}
-                  <div 
+                  <div
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     style={{
-                      background: "radial-gradient(600px circle at 50% 50%, hsl(42 70% 55% / 0.08), transparent 50%)"
+                      background:
+                        "radial-gradient(600px circle at 50% 50%, hsl(42 70% 55% / 0.08), transparent 50%)",
                     }}
                     aria-hidden="true"
                   />
-                  
+
                   {/* Content */}
                   <div className="relative flex flex-col flex-1">
                     {/* Header with icon and level */}
@@ -170,7 +175,7 @@ export function AboutSection() {
                         </span>
                       </div>
                       <div className="h-1.5 overflow-hidden rounded-full bg-border/40 ring-1 ring-border/20">
-                        <div 
+                        <div
                           className="h-full bg-gradient-to-r from-accent/80 to-accent transition-all duration-700 ease-out group-hover:from-accent group-hover:to-primary"
                           style={{ width: "60%" }}
                         />
@@ -183,7 +188,9 @@ export function AboutSection() {
 
                     {/* Unlock indicator with arrow animation */}
                     <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-accent/0 transition-all duration-300 group-hover:gap-2 group-hover:text-accent">
-                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                        →
+                      </span>
                       <span>Explore This Path</span>
                     </div>
                   </div>

@@ -26,14 +26,12 @@ async function getAllSheetNames(
   const sheetTitles =
     meta.data.sheets?.map((s) => s.properties?.title ?? "") ?? [];
 
-  // Prioritise the MEMBERS tab so it's searched first
-  const sorted = sheetTitles.sort((a, b) => {
-    const aIsMembers = a.toUpperCase() === "MEMBERS" ? 0 : 1;
-    const bIsMembers = b.toUpperCase() === "MEMBERS" ? 0 : 1;
-    return aIsMembers - bIsMembers;
-  });
+  // Only use the ALL MEMBERS tab
+  const allMembersTab = sheetTitles.filter(
+    (title) => title.toUpperCase() === "ALL MEMBERS",
+  );
 
-  return sorted;
+  return allMembersTab;
 }
 
 export interface UserRecord {

@@ -71,29 +71,6 @@ export function IdFinderSection() {
       id="id-finder"
       className="relative px-6 py-32 pb-40 overflow-hidden"
     >
-      {/* Animated background grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, hsl(var(--border) / 0.15) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--border) / 0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Glowing orbs */}
-      <div
-        className="pointer-events-none absolute top-1/3 -left-64 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute bottom-1/3 -right-64 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl"
-        aria-hidden="true"
-      />
-
       {/* Divider glow */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"

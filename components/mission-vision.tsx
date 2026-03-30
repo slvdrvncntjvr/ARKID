@@ -1,92 +1,14 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-
 export function MissionVisionSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    window.addEventListener("resize", resize);
-
-    const particles: {
-      x: number; y: number; size: number;
-      opacity: number; speed: number; char: string;
-    }[] = [];
-
-    const runes = ["⬡", "◈", "⟁", "⌬", "⎔", "◇", "⬢", "✦", "⊕", "◉"];
-
-    for (let i = 0; i < 40; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 12 + 6,
-        opacity: Math.random() * 0.15 + 0.03,
-        speed: Math.random() * 0.3 + 0.1,
-        char: runes[Math.floor(Math.random() * runes.length)],
-      });
-    }
-
-    let raf: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const p of particles) {
-        p.y -= p.speed;
-        p.opacity += Math.sin(Date.now() * 0.001 + p.x) * 0.002;
-        if (p.y < -20) { p.y = canvas.height + 20; p.x = Math.random() * canvas.width; }
-        ctx.globalAlpha = Math.max(0.02, Math.min(0.18, p.opacity));
-        ctx.fillStyle = "hsl(42, 70%, 55%)";
-        ctx.font = `${p.size}px monospace`;
-        ctx.fillText(p.char, p.x, p.y);
-      }
-      ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
   return (
-    <section id="mission-vision" className="relative overflow-hidden px-6 py-28">
-      <canvas
-        ref={canvasRef}
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-60"
-        aria-hidden="true"
-      />
-
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            hsl(42 70% 55% / 0.03) 0px,
-            hsl(42 70% 55% / 0.03) 1px,
-            transparent 1px,
-            transparent 60px
-          )`,
-        }}
-        aria-hidden="true"
-      />
-
+    <section
+      id="mission-vision"
+      className="relative overflow-hidden px-6 py-28"
+    >
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-3/4 -translate-x-1/2"
         style={{
-          background: "linear-gradient(90deg, transparent, hsl(42 70% 55% / 0.5), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, hsl(42 70% 55% / 0.5), transparent)",
           boxShadow: "0 0 30px hsl(42 70% 55% / 0.2)",
         }}
         aria-hidden="true"
@@ -129,16 +51,21 @@ export function MissionVisionSection() {
             <div
               className="absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               style={{
-                background: "linear-gradient(135deg, hsl(42 70% 55% / 0.4), transparent 50%, hsl(42 70% 55% / 0.2))",
+                background:
+                  "linear-gradient(135deg, hsl(42 70% 55% / 0.4), transparent 50%, hsl(42 70% 55% / 0.2))",
               }}
               aria-hidden="true"
             />
 
             <div className="relative rounded-2xl border border-border/50 bg-card/60 p-8 backdrop-blur-sm">
               <div className="absolute -top-3 left-6 flex items-center gap-1.5 rounded-full border border-accent/40 bg-background px-3 py-0.5">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-accent">01</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                  01
+                </span>
                 <span className="h-3 w-px bg-accent/30" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-accent">Mission</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                  Mission
+                </span>
               </div>
 
               <div
@@ -159,30 +86,15 @@ export function MissionVisionSection() {
                 Our Mission
               </h4>
 
-              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                At ARK (Academitech Research and Knowledge), our mission is to reimagine learning by turning study, creation, and collaboration into a gamified journey. We empower students to grow academically, creatively, and professionally through structured challenges, real-world projects, and community-driven support. Preparing them to thrive in both the tech industry and the Digital Age.
+              <p className="mb-6 text-l leading-relaxed text-muted-foreground">
+                At ARK (Academitech Research and Knowledge), our mission is to
+                reimagine learning by turning study, creation, and collaboration
+                into a gamified journey. We empower students to grow
+                academically, creatively, and professionally through structured
+                challenges, real-world projects, and community-driven support.
+                Preparing them to thrive in both the tech industry and the
+                Digital Age.
               </p>
-
-              <div className="space-y-3">
-                {[
-                  { label: "Education", value: 90 },
-                  { label: "Community", value: 85 },
-                  { label: "Innovation", value: 75 },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <div className="mb-1 flex justify-between font-mono text-[10px] text-muted-foreground/60">
-                      <span>{stat.label}</span>
-                      <span>{stat.value}%</span>
-                    </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-border/30">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-accent/70 to-accent transition-all duration-1000"
-                        style={{ width: `${stat.value}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
 
               <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
             </div>
@@ -193,16 +105,21 @@ export function MissionVisionSection() {
             <div
               className="absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               style={{
-                background: "linear-gradient(225deg, hsl(180 60% 45% / 0.3), transparent 50%, hsl(42 70% 55% / 0.2))",
+                background:
+                  "linear-gradient(225deg, hsl(180 60% 45% / 0.3), transparent 50%, hsl(42 70% 55% / 0.2))",
               }}
               aria-hidden="true"
             />
 
             <div className="relative rounded-2xl border border-border/50 bg-card/60 p-8 backdrop-blur-sm">
               <div className="absolute -top-3 left-6 flex items-center gap-1.5 rounded-full border border-primary/40 bg-background px-3 py-0.5">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-primary">02</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                  02
+                </span>
                 <span className="h-3 w-px bg-primary/30" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-primary">Vision</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                  Vision
+                </span>
               </div>
 
               <div
@@ -223,42 +140,18 @@ export function MissionVisionSection() {
                 Our Vision
               </h4>
 
-              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                To become a leading student-driven community that transforms the way students learn and create by integrating gamified systems, a collaborative environment, and real-world projects. We aim to empower future innovators, leaders, and creators with the skills, mindset, and support they need to thrive academically, professionally, and socially.
+              <p className="mb-6 text-l leading-relaxed text-muted-foreground">
+                To become a leading student-driven community that transforms the
+                way students learn and create by integrating gamified systems, a
+                collaborative environment, and real-world projects. We aim to
+                empower future innovators, leaders, and creators with the
+                skills, mindset, and support they need to thrive academically,
+                professionally, and socially.
               </p>
-
-              <div className="space-y-3">
-                {[
-                  { label: "Industry Impact", value: 95 },
-                  { label: "Creative Output", value: 88 },
-                  { label: "National Reach", value: 70 },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <div className="mb-1 flex justify-between font-mono text-[10px] text-muted-foreground/60">
-                      <span>{stat.label}</span>
-                      <span>{stat.value}%</span>
-                    </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-border/30">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-primary/70 to-primary transition-all duration-1000"
-                        style={{ width: `${stat.value}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
 
               <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             </div>
           </div>
-        </div>
-
-        <div className="mt-16 flex items-center justify-center gap-3">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-accent/40" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/40">
-            Scroll to Continue
-          </span>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent/40" />
         </div>
       </div>
     </section>

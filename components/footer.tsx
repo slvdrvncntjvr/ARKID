@@ -5,19 +5,6 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-border/40 bg-gradient-to-b from-background to-background/50 px-6 py-16">
       <div
-        className="pointer-events-none absolute inset-0 opacity-10"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="pointer-events-none absolute -bottom-48 -left-48 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-48 -right-48 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-
-      <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"
         style={{
           background:
@@ -49,9 +36,10 @@ export function Footer() {
             </div>
 
             <p className="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-              A student-led guild proving that game development is more than just a
-              hobby—it&apos;s a path to{" "}
-              <span className="font-semibold text-foreground">real skills</span>,{" "}
+              A student-led guild proving that game development is more than
+              just a hobby—it&apos;s a path to{" "}
+              <span className="font-semibold text-foreground">real skills</span>
+              ,{" "}
               <span className="font-semibold text-foreground">
                 creative impact
               </span>

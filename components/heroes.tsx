@@ -1,221 +1,191 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 const heroes = [
   {
     name: "Mel Carl A. Chacon",
-    role: "Visionary / Guildmaster",
-    tag: "CEO",
-    description: "The guiding force of ARK, charting its grand design and leading the guild toward bold quests and uncharted realms.",
+    role: "Chief Executive Officer",
+    description:
+      "The guiding force of ARK, charting its grand design and leading the guild toward bold quests and uncharted realms.",
     rune: "⚔️",
-    rank: "S",
-    photo: null,
-  },
-  {
-    name: "Christian Joseph M. Delos Santos",
-    role: "Executor",
-    tag: "COO",
-    description: "Master of order and execution, ensuring every mission, quest, and venture unfolds with precision and valor.",
-    rune: "⚙️",
-    rank: "S",
-    photo: null,
-  },
-  {
-    name: "Salvador Vincent R. Javier",
-    role: "Navigator",
-    tag: "External",
-    description: "The bridge beyond the walls. He forges alliances, strengthens partnerships, and represents ARK with honor in every external undertaking.",
-    rune: "🛡️",
-    rank: "S",
-    photo: null,
+    photo: "/heroes/chacon.png",
   },
   {
     name: "Joshua Kurt M. Manzano",
-    role: "Unifier / Warden",
-    tag: "Internal",
-    description: "Guardian of the guild's spirit, fostering unity, harmony, and steadfast coordination within ARK's stronghold.",
+    role: "Chief Internal Officer",
+    description:
+      "Guardian of the guild's spirit, fostering unity, harmony, and steadfast coordination within ARK's stronghold.",
     rune: "💫",
-    rank: "S",
-    photo: null,
+    photo: "/heroes/manzano.png",
   },
   {
-    name: "Dean Benedict Gomez",
-    role: "Fortunekeeper / Treasurer",
-    tag: "Finance",
-    description: "The vigilant steward of ARK's treasures, safeguarding resources and ensuring the guild thrives in every conquest.",
-    rune: "💰",
-    rank: "A",
-    photo: null,
+    name: "Salvador Vincent R. Javier",
+    role: "Chief External Officer",
+    description:
+      "The bridge beyond the walls. He forges alliances, strengthens partnerships, and represents ARK with honor in every external undertaking.",
+    rune: "🛡️",
+    photo: "/heroes/javier.png",
+  },
+  {
+    name: "Christian Joseph M. Delos Santos",
+    role: "Chief Operations Officer",
+    description:
+      "Master of order and execution, ensuring every mission, quest, and venture unfolds with precision and valor.",
+    rune: "⚙️",
+    photo: "/heroes/cj.png",
   },
   {
     name: "Juan Miguel Nacubuan",
-    role: "Artificer",
-    tag: "Technology",
-    description: "Master of runes and systems, crafting the digital foundations that bring ARK's bold ideas to life.",
+    role: "Chief Technology Officer",
+    description:
+      "Master of runes and systems, crafting the digital foundations that bring ARK's bold ideas to life.",
     rune: "🔧",
-    rank: "A",
-    photo: null,
+    photo: "/heroes/nacubuan.png",
+  },
+  {
+    name: "Dean Benedict Gomez",
+    role: "Chief Finance Officer",
+    description:
+      "Vigilant steward of ARK's treasures, ensuring the guild thrives in every conquest.",
+    rune: "💰",
+    photo: "/heroes/gomez.png",
   },
 ];
 
-const rankColors: Record<string, string> = {
-  S: "hsl(42 70% 55%)",
-  A: "hsl(180 60% 45%)",
-  B: "hsl(260 60% 65%)",
-};
-
-export function HeroesSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    type Ember = {
-      x: number; y: number;
-      vx: number; vy: number;
-      life: number; maxLife: number;
-      size: number; color: string;
-    };
-
-    const embers: Ember[] = [];
-    const colors = [
-      "hsl(42 90% 60%)",
-      "hsl(20 90% 55%)",
-      "hsl(10 85% 50%)",
-      "hsl(50 95% 65%)",
-      "hsl(30 80% 45%)",
-    ];
-
-    // 5 fire sources spread across full bottom width
-    const getOrigins = () => [
-      { x: canvas.width * 0.05, y: canvas.height * 0.96 },
-      { x: canvas.width * 0.25, y: canvas.height * 0.93 },
-      { x: canvas.width * 0.50, y: canvas.height * 0.91 },
-      { x: canvas.width * 0.75, y: canvas.height * 0.93 },
-      { x: canvas.width * 0.95, y: canvas.height * 0.96 },
-    ];
-
-    const spawnEmber = () => {
-      const origins = getOrigins();
-      const origin = origins[Math.floor(Math.random() * origins.length)];
-      embers.push({
-        x: origin.x + (Math.random() - 0.5) * 80,
-        y: origin.y,
-        vx: (Math.random() - 0.5) * 1.8,
-        vy: -(Math.random() * 3.0 + 1.2),
-        life: 0,
-        maxLife: Math.random() * 180 + 100,
-        size: Math.random() * 3.5 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
-    };
-
-    // Pre-seed embers so they're visible immediately
-    for (let i = 0; i < 80; i++) spawnEmber();
-
-    let raf: number;
-    let frame = 0;
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (frame % 2 === 0) spawnEmber();
-      if (frame % 4 === 0) spawnEmber();
-      frame++;
-
-      // Warm glow pool at each origin
-      for (const origin of getOrigins()) {
-        const grd = ctx.createRadialGradient(
-          origin.x, origin.y, 0,
-          origin.x, origin.y, 160
-        );
-        grd.addColorStop(0, "hsl(42 90% 55% / 0.10)");
-        grd.addColorStop(0.5, "hsl(20 80% 40% / 0.04)");
-        grd.addColorStop(1, "transparent");
-        ctx.fillStyle = grd;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      // Update and draw embers
-      for (let i = embers.length - 1; i >= 0; i--) {
-        const e = embers[i];
-        e.life++;
-        e.x += e.vx + Math.sin(e.life * 0.04 + e.x * 0.01) * 0.5;
-        e.y += e.vy;
-        e.vy *= 0.99;
-        e.vx *= 0.997;
-
-        const alpha = 1 - e.life / e.maxLife;
-        if (alpha <= 0 || e.y < -20) { embers.splice(i, 1); continue; }
-
-        // Main ember
-        ctx.globalAlpha = alpha * 0.85;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = e.color;
-        ctx.fillStyle = e.color;
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.size * (1 - (e.life / e.maxLife) * 0.6), 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Trailing spark
-        ctx.globalAlpha = alpha * 0.25;
-        ctx.fillStyle = e.color;
-        ctx.beginPath();
-        ctx.arc(e.x - e.vx * 1.5, e.y - e.vy * 0.8, e.size * 0.35, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
+/* ─── Card ─── */
+function HeroCard({ hero }: { hero: (typeof heroes)[number] }) {
   return (
-    <section id="heroes" className="relative min-h-screen overflow-hidden px-6 py-28">
-      <canvas
-        ref={canvasRef}
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      />
-
+    <div className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border/50 bg-card/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[5px] hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
+      {/* top-edge highlight */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute top-0 left-1/2 h-px w-[60%] -translate-x-1/2 opacity-40 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
-            "radial-gradient(ellipse 100% 50% at 50% 100%, hsl(42 60% 20% / 0.12), transparent)",
+            "linear-gradient(to right, transparent, hsl(var(--accent)), transparent)",
         }}
-        aria-hidden="true"
       />
 
+      {/* corner brackets */}
+      {[
+        "top-[6px] left-[6px] border-t-2 border-l-2",
+        "top-[6px] right-[6px] border-t-2 border-r-2",
+        "bottom-[6px] left-[6px] border-b-2 border-l-2",
+        "bottom-[6px] right-[6px] border-b-2 border-r-2",
+      ].map((pos, i) => (
+        <div
+          key={i}
+          className={`pointer-events-none absolute h-4 w-4 border-accent/30 transition-opacity duration-300 group-hover:border-accent/80 ${pos}`}
+        />
+      ))}
+
+      {/* photo frame — portrait arch */}
+      <div
+        className="relative mb-4 flex-shrink-0 overflow-hidden border border-border/60 bg-card transition-all duration-300 group-hover:border-accent/50 group-hover:shadow-md group-hover:shadow-accent/10"
+        style={{
+          width: 96,
+          height: 112,
+          borderRadius: "8px 8px 48px 48px",
+        }}
+      >
+        {/* inner inset border */}
+        <div
+          className="pointer-events-none absolute border border-accent/10"
+          style={{
+            inset: 4,
+            borderRadius: "5px 5px 44px 44px",
+            zIndex: 1,
+          }}
+        />
+
+        {hero.photo ? (
+          <Image
+            src={hero.photo}
+            alt={hero.name}
+            fill
+            style={{
+              objectFit: "cover",
+              objectPosition: "center top",
+              borderRadius: "6px 6px 46px 46px",
+            }}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-4xl text-accent/25">
+            {hero.rune}
+          </div>
+        )}
+
+        {/* bottom vignette */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0"
+          style={{
+            height: "45%",
+            background:
+              "linear-gradient(to top, hsl(var(--card)) 0%, transparent 100%)",
+            zIndex: 2,
+          }}
+        />
+      </div>
+
+      {/* name */}
+      <h3 className="mb-0.5 text-center font-display text-lg font-bold leading-tight text-foreground">
+        {hero.name}
+      </h3>
+
+      {/* fantasy title */}
+      <p className="mb-3 font-mono text-xs italic tracking-wide text-muted-foreground/60">
+        {hero.role}
+      </p>
+
+      {/* divider */}
+      <div className="mb-3 flex w-4/5 items-center gap-1.5">
+        <div
+          className="h-px flex-1"
+          style={{
+            background:
+              "linear-gradient(to right, transparent, hsl(var(--border)))",
+          }}
+        />
+        <div className="h-1 w-1 rounded-full bg-accent/60" />
+        <div
+          className="h-px flex-1"
+          style={{
+            background:
+              "linear-gradient(to left, transparent, hsl(var(--border)))",
+          }}
+        />
+      </div>
+
+      {/* description */}
+      <p className="text-center text-sm leading-relaxed text-muted-foreground/80">
+        {hero.description}
+      </p>
+
+      {/* bottom edge accent */}
+      <div className="absolute bottom-0 left-0 h-0.5 w-0 rounded-b-2xl bg-gradient-to-r from-accent/0 via-accent to-accent/0 transition-all duration-500 group-hover:w-full" />
+    </div>
+  );
+}
+
+/* ─── Section ─── */
+export function HeroesSection() {
+  return (
+    <section
+      id="heroes"
+      className="relative min-h-screen overflow-hidden px-6 py-28"
+    >
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"
         style={{
-          background: "linear-gradient(90deg, transparent, hsl(42 70% 55% / 0.4), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, hsl(42 70% 55% / 0.4), transparent)",
           boxShadow: "0 0 24px hsl(42 70% 55% / 0.2)",
         }}
         aria-hidden="true"
       />
 
       <div className="relative mx-auto max-w-6xl">
+        {/* ── Header — matches site pattern ── */}
         <div className="mb-4 flex items-center gap-3">
           <div className="h-px w-8 bg-accent/60" />
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
@@ -245,102 +215,11 @@ export function HeroesSection() {
           // The Vanguard of ARK — Masters of the Guild
         </p>
 
+        {/* ── Grid ── */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {heroes.map((hero, i) => (
-            <div
-              key={`${hero.name}-${i}`}
-              className="group relative"
-              style={{ animationDelay: `${i * 150}ms` }}
-            >
-              <div
-                className="absolute -inset-px rounded-2xl opacity-0 transition-all duration-500 group-hover:opacity-100"
-                style={{
-                  background: `linear-gradient(135deg, ${rankColors[hero.rank]}33, transparent 60%)`,
-                  boxShadow: `0 0 30px ${rankColors[hero.rank]}22`,
-                }}
-                aria-hidden="true"
-              />
-
-              <div className="relative flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-card/70 backdrop-blur-md">
-                <div
-                  className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full border text-xs font-black"
-                  style={{
-                    borderColor: rankColors[hero.rank],
-                    color: rankColors[hero.rank],
-                    boxShadow: `0 0 10px ${rankColors[hero.rank]}44`,
-                    background: `${rankColors[hero.rank]}11`,
-                  }}
-                >
-                  {hero.rank}
-                </div>
-
-                <div className="relative mx-auto mt-8 h-28 w-28">
-                  <div
-                    className="relative h-28 w-28 overflow-hidden transition-transform duration-300 group-hover:scale-105"
-                    style={{
-                      clipPath:
-                        "polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)",
-                      background: `linear-gradient(135deg, ${rankColors[hero.rank]}33, hsl(var(--card)))`,
-                    }}
-                  >
-                    {hero.photo ? (
-                      <Image
-                        src={hero.photo}
-                        alt={hero.name}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/10 to-card/80">
-                        <span className="text-4xl">{hero.rune}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="p-6 pt-4 text-center">
-                  <div
-                    className="mb-2 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5"
-                    style={{
-                      borderColor: `${rankColors[hero.rank]}44`,
-                      background: `${rankColors[hero.rank]}0d`,
-                    }}
-                  >
-                    <span
-                      className="font-mono text-[10px] uppercase tracking-widest"
-                      style={{ color: rankColors[hero.rank] }}
-                    >
-                      {hero.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="mb-0.5 font-display text-lg font-bold leading-tight text-foreground">
-                    {hero.name}
-                  </h3>
-                  <p className="mb-4 font-mono text-xs text-muted-foreground/60">
-                    {hero.role}
-                  </p>
-
-                  <p className="text-sm leading-relaxed text-muted-foreground/80">
-                    {hero.description}
-                  </p>
-                </div>
-
-                <div
-                  className="h-0.5 w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${rankColors[hero.rank]}, transparent)`,
-                  }}
-                />
-              </div>
-            </div>
+          {heroes.map((hero) => (
+            <HeroCard key={hero.name} hero={hero} />
           ))}
-        </div>
-
-        <div className="mt-20 flex flex-col items-center gap-2">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/30">
-            🔥 Gathered around the guild campfire
-          </p>
         </div>
       </div>
     </section>
