@@ -11,6 +11,7 @@ const navItems = [
   { label: "Mission & Vision", href: "#mission-vision" },
   { label: "Heroes", href: "#heroes" },
   { label: "Projects", href: "#projects" },
+  { label: "Games", href: "#games" },
   { label: "ID Finder", href: "#id-finder" },
 ];
 
@@ -65,7 +66,7 @@ export function Navigation() {
         >
           <Image
             src="/ark-logo.png"
-            alt=""
+            alt="ARK logo"
             width={28}
             height={20}
             className="rounded-sm object-contain"

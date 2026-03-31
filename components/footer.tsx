@@ -3,16 +3,16 @@ import { Mail, MapPin, Facebook, Users, Heart } from "lucide-react";
 
 const builders = [
   {
-    name: "Salvador Vincent R. Javier",
-    role: "Product & Frontend",
+    name: "Salvador Vincent Javier",
+    role: "Full-Stack Software Developer",
   },
   {
-    name: "Juan Miguel Nacubuan",
-    role: "Backend & Integrations",
+    name: "Franz Emmanuel Baes",
+    role: "Full-stack Software Developer",
   },
   {
-    name: "Christian Joseph M. Delos Santos",
-    role: "UI Systems & QA",
+    name: "Precious Manucom",
+    role: "Software Developer, Product Experience",
   },
 ];
 
@@ -96,6 +96,11 @@ export function Footer() {
               <li>
                 <a href="#projects" className="text-sm text-muted-foreground">
                   Projects
+                </a>
+              </li>
+              <li>
+                <a href="#games" className="text-sm text-muted-foreground">
+                  Games
                 </a>
               </li>
               <li>

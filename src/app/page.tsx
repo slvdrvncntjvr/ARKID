@@ -4,6 +4,7 @@ import { AboutSection } from "@/components/about-section";
 import { MissionVisionSection } from "@/components/mission-vision";
 import { HeroesSection } from "@/components/heroes";
 import { ProjectsSection } from "@/components/projects-section";
+import { GamesSection } from "@/components/games-section";
 import { IdFinderSection } from "@/components/id-finder-section";
 import { Footer } from "@/components/footer";
 import { GlobalEmbers } from "@/components/global-embers";
@@ -61,6 +62,7 @@ export default function Page() {
         <MissionVisionSection />
         <HeroesSection />
         <ProjectsSection />
+        <GamesSection />
         <IdFinderSection />
         <Footer />
       </div>

@@ -41,7 +41,8 @@ function pad(n: number) {
 /* ─── Component ─── */
 export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
   const [current, setCurrent] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(upcomingEvent.date));
+  const [timeLeft, setTimeLeft] = useState<ReturnType<typeof getTimeLeft>>(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const multiSlide = slides.length > 1;
 
@@ -63,6 +64,9 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
 
   /* ── Countdown tick ── */
   useEffect(() => {
+    setHasHydrated(true);
+    setTimeLeft(getTimeLeft(upcomingEvent.date));
+
     const id = setInterval(() => {
       setTimeLeft(getTimeLeft(upcomingEvent.date));
     }, 1000);
@@ -195,6 +199,7 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
+                  timeZone: "Asia/Manila",
                 })}
               </p>
             </div>
@@ -202,7 +207,7 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
 
           {/* Right — countdown */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {timeLeft ? (
+            {hasHydrated && timeLeft ? (
               <>
                 {[
                   { label: "Days", value: pad(timeLeft.days) },
@@ -228,12 +233,30 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
                 ))}
               </>
             ) : (
-              <div className="flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/5 px-5 py-3">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-                <span className="font-display text-base font-bold text-accent">
-                  Soon!
-                </span>
-              </div>
+              <>
+                {[
+                  { label: "Days", value: "--" },
+                  { label: "Hrs", value: "--" },
+                  { label: "Min", value: "--" },
+                  { label: "Sec", value: "--" },
+                ].map((unit, i) => (
+                  <div key={unit.label} className="flex items-center gap-2 sm:gap-3">
+                    <div className="flex flex-col items-center">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-card/80 font-display text-lg font-bold tabular-nums text-muted-foreground sm:h-14 sm:w-14 sm:text-xl">
+                        {unit.value}
+                      </span>
+                      <span className="mt-1 text-[9px] font-medium uppercase tracking-widest text-muted-foreground">
+                        {unit.label}
+                      </span>
+                    </div>
+                    {i < 3 && (
+                      <span className="mb-4 text-lg font-bold text-accent/40">
+                        :
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </>
             )}
           </div>
         </div>
