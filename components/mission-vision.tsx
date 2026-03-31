@@ -2,7 +2,7 @@ export function MissionVisionSection() {
   return (
     <section
       id="mission-vision"
-      className="relative overflow-hidden px-6 py-28"
+      className="relative overflow-hidden px-6 pt-16 pb-28"
     >
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-3/4 -translate-x-1/2"
@@ -15,17 +15,6 @@ export function MissionVisionSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="h-px w-8 bg-accent/60" />
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-              Guild Codex
-            </span>
-          </div>
-          <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
-        </div>
-
         <h2 className="mb-4 font-display text-4xl font-black tracking-tight text-foreground md:text-6xl">
           Our{" "}
           <span

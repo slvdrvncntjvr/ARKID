@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Cinzel } from "next/font/google";
+import { FirefliesBackground } from "@/components/fireflies-background";
 
 import "./globals.css";
 
@@ -12,7 +13,7 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arkph.tech"),
-  title: "ARK | Student Game Dev Community",
+  title: "ARK - Student Game Dev Community",
   description:
     "ARK is a student game development community. We collaborate, create games, and grow together. Come build with us.",
   icons: {
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${cinzel.variable} font-sans antialiased`}
       >
+        <FirefliesBackground count={35} />
         {children}
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Calendar, Users, ExternalLink } from "lucide-react";
 
@@ -63,7 +63,8 @@ const projects: Project[] = [
     description:
       "ARK-hosted game jam during CCIS Week challenging students to rapid-prototype creative game concepts.",
     image: "/projects/take-one-1.jpg",
-    imageAlt: "ARK members gathered during the Take One, Leave the Rest game jam.",
+    imageAlt:
+      "ARK members gathered during the Take One, Leave the Rest game jam.",
     tags: ["Game Jam", "CCIS Week"],
     date: "December 11, 2025",
     participants: "40+",
@@ -204,9 +205,28 @@ const projects: Project[] = [
 const INITIAL_COUNT = 4;
 
 /* ─── Card ─── */
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  index,
+  visible,
+}: {
+  project: Project;
+  index: number;
+  visible: boolean;
+}) {
+  const isOngoing = project.participants.toLowerCase() === "ongoing";
+
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-card/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[5px] hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
+    <div
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card ring-1 ring-border/20 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[3px] hover:border-accent/50 hover:ring-accent/20 hover:shadow-lg hover:shadow-accent/10 ${
+        visible ? "animate-fade-up" : "opacity-0 translate-y-6"
+      }`}
+      style={{
+        animationDelay: visible ? `${index * 100}ms` : undefined,
+        animationFillMode: "forwards",
+        boxShadow: "inset 0 1px 0 0 hsl(var(--border) / 0.15)",
+      }}
+    >
       {project.image && (
         <div className="mb-5 overflow-hidden rounded-xl border border-border/50 bg-black/20">
           <Image
@@ -221,11 +241,21 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* top-edge highlight */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 h-px w-[60%] -translate-x-1/2 opacity-40 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute top-0 left-1/2 h-px w-[60%] -translate-x-1/2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
             "linear-gradient(to right, transparent, hsl(var(--accent)), transparent)",
         }}
+      />
+
+      {/* hover glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(600px circle at 50% 0%, hsl(42 70% 55% / 0.06), transparent 50%)",
+        }}
+        aria-hidden="true"
       />
 
       {/* corner brackets */}
@@ -237,7 +267,7 @@ function ProjectCard({ project }: { project: Project }) {
       ].map((pos, i) => (
         <div
           key={i}
-          className={`pointer-events-none absolute h-4 w-4 border-accent/30 transition-opacity duration-300 group-hover:border-accent/80 ${pos}`}
+          className={`pointer-events-none absolute h-4 w-4 border-accent/30 transition-all duration-300 group-hover:border-accent/70 group-hover:h-5 group-hover:w-5 ${pos}`}
         />
       ))}
 
@@ -259,7 +289,17 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
         <div className="flex items-center gap-1.5">
           <Users size={13} className="text-accent" />
-          <span>{project.participants}</span>
+          {isOngoing ? (
+            <span className="inline-flex items-center gap-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              {project.participants}
+            </span>
+          ) : (
+            <span>{project.participants}</span>
+          )}
         </div>
       </div>
 
@@ -326,10 +366,35 @@ function ProjectCard({ project }: { project: Project }) {
 /* ─── Section ─── */
 export function ProjectsSection() {
   const [showAll, setShowAll] = useState(false);
+  const [inView, setInView] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
 
+  /* ── IntersectionObserver — trigger entrance once ── */
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="projects" className="relative overflow-hidden px-6 py-28">
+    <section
+      id="projects"
+      className="relative overflow-hidden px-6 pt-16 pb-28"
+    >
       {/* top separator — gold glow line */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"
@@ -342,18 +407,6 @@ export function ProjectsSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        {/* header */}
-        <div className="mb-4 flex items-center gap-3">
-          <div className="h-px w-8 bg-accent/60" />
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Our Work
-            </span>
-          </div>
-          <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
-        </div>
-
         <h2 className="mb-3 font-display text-4xl font-black tracking-tight text-foreground md:text-6xl">
           The Tower We Raise
         </h2>
@@ -365,9 +418,14 @@ export function ProjectsSection() {
         </p>
 
         {/* grid */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {visible.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
+          {visible.map((project, i) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={i}
+              visible={inView}
+            />
           ))}
         </div>
 

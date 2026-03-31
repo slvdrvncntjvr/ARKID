@@ -85,13 +85,6 @@ export function IdFinderSection() {
       <div className="relative mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
-            <Shield size={12} className="text-accent" />
-            <span className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              Member Database
-            </span>
-          </div>
-
           <h2 className="mb-6 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             <span className="text-balance">
               Look Up A{" "}

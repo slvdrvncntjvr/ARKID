@@ -172,7 +172,7 @@ export function HeroesSection() {
   return (
     <section
       id="heroes"
-      className="relative min-h-screen overflow-hidden px-6 py-28"
+      className="relative min-h-screen overflow-hidden px-6 pt-16 pb-28"
     >
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"
@@ -185,18 +185,6 @@ export function HeroesSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        {/* ── Header — matches site pattern ── */}
-        <div className="mb-4 flex items-center gap-3">
-          <div className="h-px w-8 bg-accent/60" />
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1">
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Meet The Heroes
-            </span>
-          </div>
-          <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
-        </div>
-
         <h2 className="mb-3 font-display text-4xl font-black tracking-tight text-foreground md:text-6xl">
           The{" "}
           <span className="relative inline-block">
