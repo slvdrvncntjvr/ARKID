@@ -9,6 +9,20 @@
 }
 
 @layer base {
+    *,
+    *::before,
+    *::after {
+        font-family: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea,
+    optgroup {
+        font-family: inherit;
+    }
+
     :root {
         --background: 180 30% 6%;
         --foreground: 40 10% 90%;

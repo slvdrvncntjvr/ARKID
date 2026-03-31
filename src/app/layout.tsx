@@ -1,13 +1,13 @@
 import React from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Cinzel } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceGrotesk = Space_Grotesk({
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
+const cinzel = Cinzel({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-cinzel",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${cinzel.variable} font-sans antialiased`}
       >
         {children}
       </body>

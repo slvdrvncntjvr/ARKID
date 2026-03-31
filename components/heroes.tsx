@@ -133,7 +133,7 @@ function HeroCard({ hero }: { hero: (typeof heroes)[number] }) {
       </h3>
 
       {/* fantasy title */}
-      <p className="mb-3 font-mono text-xs italic tracking-wide text-muted-foreground/60">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
         {hero.role}
       </p>
 
