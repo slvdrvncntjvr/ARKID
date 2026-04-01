@@ -209,20 +209,22 @@ function ProjectCard({
   project,
   index,
   visible,
+  animate,
 }: {
   project: Project;
   index: number;
   visible: boolean;
+  animate: boolean;
 }) {
   const isOngoing = project.participants.toLowerCase() === "ongoing";
 
   return (
     <div
       className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card ring-1 ring-border/20 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[3px] hover:border-accent/50 hover:ring-accent/20 hover:shadow-lg hover:shadow-accent/10 ${
-        visible ? "animate-fade-up" : "opacity-0 translate-y-6"
+        animate ? (visible ? "animate-fade-up" : "opacity-0 translate-y-6") : ""
       }`}
       style={{
-        animationDelay: visible ? `${index * 100}ms` : undefined,
+        animationDelay: animate && visible ? `${index * 100}ms` : undefined,
         animationFillMode: "forwards",
         boxShadow: "inset 0 1px 0 0 hsl(var(--border) / 0.15)",
       }}
@@ -425,6 +427,7 @@ export function ProjectsSection() {
               project={project}
               index={i}
               visible={inView}
+              animate={i < INITIAL_COUNT}
             />
           ))}
         </div>
