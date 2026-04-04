@@ -65,7 +65,10 @@ function getSheetName(): string {
 }
 
 function getSpreadsheetId(): string {
-  return getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID");
+  return (
+    process.env.CERTIFICATES_SPREADSHEET_ID?.trim() ||
+    getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID")
+  );
 }
 
 function normalize(value: string): string {

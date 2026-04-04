@@ -41,8 +41,8 @@ export async function getGoogleSheetsWriteClient() {
 }
 
 /**
- * Fetches all worksheet/tab names from the spreadsheet.
- * Returns them in order, with "MEMBERS" prioritised first (if it exists).
+ * Returns the specific members tab to use for member lookup.
+ * Defaults to "ALL MEMBERS" but can be overridden with MEMBERS_SHEET_NAME.
  */
 async function getAllSheetNames(
   sheets: sheets_v4.Sheets,
@@ -56,12 +56,15 @@ async function getAllSheetNames(
   const sheetTitles =
     meta.data.sheets?.map((s) => s.properties?.title ?? "") ?? [];
 
-  // Only use the ALL MEMBERS tab
-  const allMembersTab = sheetTitles.filter(
-    (title) => title.toUpperCase() === "ALL MEMBERS",
+  const targetMembersTab =
+    (process.env.MEMBERS_SHEET_NAME || "ALL MEMBERS").trim().toUpperCase();
+
+  // Only use one configured tab for member search.
+  const selectedTab = sheetTitles.filter(
+    (title) => title.toUpperCase() === targetMembersTab,
   );
 
-  return allMembersTab;
+  return selectedTab;
 }
 
 export interface UserRecord {
