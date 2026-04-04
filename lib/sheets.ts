@@ -24,6 +24,22 @@ export async function getGoogleSheetsClient() {
   return google.sheets({ version: "v4", auth });
 }
 
+export async function getGoogleSheetsWriteClient() {
+  const clientEmail = getRequiredEnv("GOOGLE_SHEETS_CLIENT_EMAIL");
+  const privateKey = getRequiredEnv("GOOGLE_SHEETS_PRIVATE_KEY").replace(
+    /\\n/g,
+    "\n",
+  );
+
+  const auth = new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  return google.sheets({ version: "v4", auth });
+}
+
 /**
  * Fetches all worksheet/tab names from the spreadsheet.
  * Returns them in order, with "MEMBERS" prioritised first (if it exists).
