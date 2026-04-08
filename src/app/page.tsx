@@ -8,8 +8,11 @@ import { GamesSection } from "@/components/games-section";
 import { IdFinderSection } from "@/components/id-finder-section";
 import { Footer } from "@/components/footer";
 import { GlobalEmbers } from "@/components/global-embers";
+import { waitForLoadingWindow } from "@/lib/loading-delay";
 
-export default function Page() {
+export default async function Page() {
+  await waitForLoadingWindow();
+
   return (
     <main className="relative">
       {/* Unified background textures — shared across all sections */}

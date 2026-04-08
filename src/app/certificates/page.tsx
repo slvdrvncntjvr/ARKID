@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { CertificateLookupForm } from "@/components/certificate-lookup-form";
+import { waitForLoadingWindow } from "@/lib/loading-delay";
 
-export default function CertificatesHomePage() {
+export default async function CertificatesHomePage() {
+  await waitForLoadingWindow();
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="rounded-2xl border border-border bg-card p-8 shadow-xl">

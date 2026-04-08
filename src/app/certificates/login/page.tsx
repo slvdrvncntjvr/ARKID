@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { waitForLoadingWindow } from "@/lib/loading-delay";
 
 const ERROR_TEXT: Record<string, string> = {
   missing: "Please enter both username and password.",
@@ -10,7 +11,10 @@ interface LoginPageProps {
 }
 
 export default async function CertificatesLoginPage({ searchParams }: LoginPageProps) {
-  const resolved = searchParams ? await searchParams : {};
+  const [resolved] = await Promise.all([
+    searchParams ? searchParams : Promise.resolve({}),
+    waitForLoadingWindow(),
+  ]);
   const errorRaw = resolved.error;
   const errorKey = Array.isArray(errorRaw) ? errorRaw[0] : errorRaw;
   const errorMessage = errorKey ? ERROR_TEXT[errorKey] : "";

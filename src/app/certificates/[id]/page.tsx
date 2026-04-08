@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCertificateById } from "@/lib/certificates";
+import { waitForLoadingWindow } from "@/lib/loading-delay";
 
 interface CertificateVerifyPageProps {
   params: Promise<{ id: string }>;
@@ -21,7 +22,10 @@ function formatDate(input: string): string {
 
 export default async function CertificateVerifyPage({ params }: CertificateVerifyPageProps) {
   const { id } = await params;
-  const certificate = await getCertificateById(id);
+  const [certificate] = await Promise.all([
+    getCertificateById(id),
+    waitForLoadingWindow(),
+  ]);
 
   if (!certificate) {
     notFound();
