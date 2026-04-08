@@ -69,7 +69,7 @@ export function AboutSection() {
           </span>
         </h2>
 
-        <p className="mb-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+        <p className="mb-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg text-justify">
           ARK (AcademiTech Research and Knowledge) is a{" "}
           <span className="font-semibold text-foreground">Student-Led</span>,
           future-forward organization that equips individuals with the mindset,
