@@ -100,7 +100,7 @@ export function IdFinderSection() {
             </span>
           </h2>
 
-          <p className="mx-auto max-w-xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Search our guild roster by member ID, name, or email address to find
             fellow developers.
           </p>

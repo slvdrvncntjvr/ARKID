@@ -30,8 +30,8 @@ export function MissionVisionSection() {
           Codex
         </h2>
 
-        <p className="mb-20 max-w-lg font-mono text-sm text-muted-foreground/60">
-          // The laws that bind and drive the ARK guild forward
+        <p className="mb-20 max-w-2xl font-mono text-base leading-relaxed text-muted-foreground md:text-lg">
+          The laws that bind and drive the ARK guild forward
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -75,7 +75,7 @@ export function MissionVisionSection() {
                 Our Mission
               </h4>
 
-              <p className="mb-6 text-l leading-relaxed text-muted-foreground">
+              <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                 At ARK (AcademiTech Research and Knowledge), our mission is to
                 reimagine learning by turning study, creation, and collaboration
                 into a gamified journey. We empower students to grow
@@ -129,7 +129,7 @@ export function MissionVisionSection() {
                 Our Vision
               </h4>
 
-              <p className="mb-6 text-l leading-relaxed text-muted-foreground">
+              <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                 To become a leading student-driven community that transforms the
                 way students learn and create by integrating gamified systems, a
                 collaborative environment, and real-world projects. We aim to

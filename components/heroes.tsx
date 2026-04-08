@@ -199,8 +199,8 @@ export function HeroesSection() {
           </span>
         </h2>
 
-        <p className="mb-16 font-mono text-sm text-muted-foreground/50">
-          // The Vanguard of ARK — Masters of the Guild
+        <p className="mb-16 max-w-2xl font-mono text-base leading-relaxed text-muted-foreground md:text-lg">
+          The Vanguard of ARK — Masters of the Guild
         </p>
 
         {/* ── Grid ── */}

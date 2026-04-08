@@ -49,16 +49,29 @@ function SlotCard({
   index: number;
 }) {
   const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
+  const [next, setNext] = useState<number | null>(null);
+
+  const transitionTo = (i: number) => {
+    if (i === current || next !== null) return;
+    setNext(i);
+    setTimeout(() => {
+      setCurrent(i);
+      setNext(null);
+    }, 500);
+  };
 
   useEffect(() => {
     const delay = setTimeout(() => {
       const interval = setInterval(() => {
-        setAnimating(true);
-        setTimeout(() => {
-          setCurrent((prev) => (prev + 1) % images.length);
-          setAnimating(false);
-        }, 300);
+        setCurrent((prev) => {
+          const nextIdx = (prev + 1) % images.length;
+          setNext(nextIdx);
+          setTimeout(() => {
+            setCurrent(nextIdx);
+            setNext(null);
+          }, 500);
+          return prev;
+        });
       }, 2800);
       return () => clearInterval(interval);
     }, index * 900);
@@ -78,26 +91,31 @@ function SlotCard({
 
       {/* Slideshow area */}
       <div className="relative mb-4 overflow-hidden rounded-xl border border-border/50 bg-muted/30">
-        <div
-          className="h-44 w-full bg-cover bg-center transition-opacity duration-300"
-          style={{
-            backgroundImage: `url(${images[current]})`,
-            opacity: animating ? 0 : 1,
-          }}
-        />
+        <div className="relative h-44 w-full">
+          {/* current image — stays fully visible underneath */}
+          <img
+            src={images[current]}
+            alt={`Slide ${current + 1}`}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+
+          {/* next image — fades in on top, then becomes the new current */}
+          {next !== null && (
+            <img
+              key={next}
+              src={images[next]}
+              alt={`Slide ${next + 1}`}
+              className="absolute inset-0 h-full w-full object-cover animate-crossfade"
+            />
+          )}
+        </div>
 
         {/* Dot indicators */}
         <div className="absolute bottom-2.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
           {images.map((_, i) => (
             <button
               key={i}
-              onClick={() => {
-                setAnimating(true);
-                setTimeout(() => {
-                  setCurrent(i);
-                  setAnimating(false);
-                }, 300);
-              }}
+              onClick={() => transitionTo(i)}
               className="rounded-full transition-all duration-300"
               style={{
                 width: i === current ? "16px" : "6px",
@@ -140,7 +158,16 @@ export function GamesSection() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="mb-5 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Games We Are Building
+            <span className="relative inline-block">
+              <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                Games
+              </span>
+              <span
+                className="absolute inset-0 bg-yellow-400/20 blur-xl"
+                aria-hidden="true"
+              />
+            </span>{" "}
+            We Are Building
           </h2>
 
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">

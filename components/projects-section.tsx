@@ -481,10 +481,20 @@ export function ProjectsSection() {
 
       <div className="relative mx-auto max-w-6xl">
         <h2 className="mb-3 font-display text-4xl font-black tracking-tight text-foreground md:text-6xl">
-          The Tower We Raise
+          The{" "}
+          <span className="relative inline-block">
+            <span className="relative z-10 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+              Tower
+            </span>
+            <span
+              className="absolute inset-0 bg-yellow-400/20 blur-xl"
+              aria-hidden="true"
+            />
+          </span>{" "}
+          We Raise
         </h2>
 
-        <p className="mb-16 max-w-2xl text-sm leading-relaxed text-muted-foreground/60">
+        <p className="mb-16 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           We don&apos;t settle for &lsquo;done.&rsquo; We aim for
           &lsquo;unforgettable.&rsquo; Journey through the collection of work
           that shifted our world&apos;s axis.

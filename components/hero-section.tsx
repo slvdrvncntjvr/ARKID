@@ -83,7 +83,7 @@ export function HeroSection() {
 
           {/* subtitle */}
           <p
-            className="max-w-lg text-base font-semibold leading-relaxed text-white sm:text-lg"
+            className="max-w-2xl text-base leading-relaxed text-white md:text-lg"
             style={{
               textShadow:
                 "0 0 20px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.8), -2px -2px 0 rgba(0, 0, 0, 0.6), 2px -2px 0 rgba(0, 0, 0, 0.6), -2px 2px 0 rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0, 0, 0, 0.6)",
