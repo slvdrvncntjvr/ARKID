@@ -10,10 +10,16 @@ const slides = [
     date: "December 11, 2025 · 40+ participants",
   },
   {
-    src: "/projects/take-one-2.jpg",
-    alt: "Game jam event photo 2",
-    caption: '"Take One, Leave the Rest" — Winners Ceremony',
-    date: "December 11, 2025",
+    src: "/projects/arkBooth.jpg",
+    alt: "CCIS Week Booth",
+    caption: "CCIS Week Booth",
+    date: "December 12, 2025",
+  },
+  {
+    src: "/projects/yggSummit.jpg",
+    alt: "YGG Summit 2025",
+    caption: "YGG Summit 2025",
+    date: "November, 2025",
   },
 ];
 

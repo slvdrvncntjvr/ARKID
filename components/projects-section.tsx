@@ -8,8 +8,7 @@ type Project = {
   title: string;
   type: string;
   description: string;
-  image?: string;
-  imageAlt?: string;
+  images?: string[]; // optional — omit entirely for projects with no photos
   tags: string[];
   date: string;
   participants: string;
@@ -30,6 +29,7 @@ const projects: Project[] = [
   {
     title: "AWS Partnership",
     type: "Partnership",
+    images: ["/projects/awsPartnership.jpg"],
     description:
       "Strategic partnership with Amazon Web Services empowering ARK with cloud infrastructure and resources.",
     tags: ["Partnership", "AWS"],
@@ -45,6 +45,11 @@ const projects: Project[] = [
   {
     title: "CCIS Week Booth",
     type: "Booth",
+    images: [
+      "/projects/arkBooth.jpg",
+      "/projects/arkBooth2.jpg",
+      "/projects/arkBooth3.jpg",
+    ],
     description:
       "Interactive booth showcasing ARK's projects, games, and recruitment during CCIS Week.",
     tags: ["Exhibition", "CCIS Week"],
@@ -60,11 +65,9 @@ const projects: Project[] = [
   {
     title: '"Take One, Leave the Rest" Game Jam',
     type: "Game Jam",
+    images: ["/projects/take-one-1.jpg", "/projects/take-one-2.jpg"],
     description:
       "ARK-hosted game jam during CCIS Week challenging students to rapid-prototype creative game concepts.",
-    image: "/projects/take-one-1.jpg",
-    imageAlt:
-      "ARK members gathered during the Take One, Leave the Rest game jam.",
     tags: ["Game Jam", "CCIS Week"],
     date: "December 11, 2025",
     participants: "40+",
@@ -74,7 +77,6 @@ const projects: Project[] = [
         url: "https://web.facebook.com/share/p/1TL7fzL1zo/",
       },
       { label: "Winners", url: "https://facebook.com/share/p/1DX3YrG7jj/" },
-      { label: "Event Photo 2", url: "/projects/take-one-2.jpg" },
     ],
   },
   {
@@ -90,6 +92,7 @@ const projects: Project[] = [
   {
     title: "ARK Onboarding",
     type: "Workshop",
+    images: ["/projects/arkOnboarding.jpg", "/projects/arkOnboarding2.jpg"],
     description:
       "New members welcomed into the guild through intensive orientation and team-building activities.",
     tags: ["Community", "Training"],
@@ -103,6 +106,7 @@ const projects: Project[] = [
   {
     title: "YGG Play Summit 2025",
     type: "Conference",
+    images: ["/projects/yggSummit.jpg"],
     description:
       "ARK represented at Southeast Asia's premier gaming summit, connecting with industry pioneers.",
     tags: ["Gaming", "Summit"],
@@ -122,6 +126,7 @@ const projects: Project[] = [
   {
     title: "DOST NCR: POWERUP",
     type: "Workshop",
+    images: ["/projects/dostNCR.jpg"],
     description:
       "Intensive tech skills workshop powered by DOST NCR, elevating our guild's technical capabilities.",
     tags: ["Workshop", "Partnership"],
@@ -161,23 +166,9 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Interest Check: The Gates Open",
-    type: "Recruitment",
-    description:
-      "The ARK opened its gates seeking students ready to explore, learn, and build beyond the screen.",
-    tags: ["Recruitment", "Community"],
-    date: "July 25, 2025",
-    participants: "50+",
-    links: [
-      {
-        label: "Announcement",
-        url: "https://web.facebook.com/share/p/1FbViQv7Jc/",
-      },
-    ],
-  },
-  {
     title: "Philippine Tech Career Fest",
     type: "Conference",
+    images: ["/projects/PHTechFest.jpg", "/projects/PHTechFest1.jpg"],
     description:
       "Guild members explored career opportunities and networked with tech industry leaders across the Philippines.",
     tags: ["Career", "Networking"],
@@ -204,6 +195,96 @@ const projects: Project[] = [
 
 const INITIAL_COUNT = 4;
 
+/* ─── Slideshow ─── */
+function Slideshow({
+  images,
+  staggerIndex,
+}: {
+  images: string[];
+  staggerIndex: number;
+}) {
+  const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState<number | null>(null);
+
+  const transitionTo = (i: number) => {
+    if (i === current || next !== null) return;
+    setNext(i);
+    setTimeout(() => {
+      setCurrent(i);
+      setNext(null);
+    }, 500);
+  };
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const delay = setTimeout(() => {
+      const interval = setInterval(() => {
+        setCurrent((prev) => {
+          const nextIdx = (prev + 1) % images.length;
+          setNext(nextIdx);
+          setTimeout(() => {
+            setCurrent(nextIdx);
+            setNext(null);
+          }, 500);
+          return prev;
+        });
+      }, 2800);
+      return () => clearInterval(interval);
+    }, staggerIndex * 600);
+
+    return () => clearTimeout(delay);
+  }, [images.length, staggerIndex]);
+
+  return (
+    <div className="relative mb-5 overflow-hidden rounded-xl border border-border/50 bg-black/20">
+      {/* fixed height wrapper so both layers share the same space */}
+      <div className="relative h-48 w-full">
+        {/* current image — stays fully visible underneath */}
+        <Image
+          src={images[current]}
+          alt={`Slide ${current + 1}`}
+          width={1200}
+          height={675}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+
+        {/* next image — fades in on top, then becomes the new current */}
+        {next !== null && (
+          <Image
+            key={next}
+            src={images[next]}
+            alt={`Slide ${next + 1}`}
+            width={1200}
+            height={675}
+            className="absolute inset-0 h-full w-full object-cover animate-crossfade"
+          />
+        )}
+      </div>
+
+      {/* Dot indicators — only shown when there are multiple images */}
+      {images.length > 1 && (
+        <div className="absolute bottom-2.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => transitionTo(i)}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === current ? "16px" : "6px",
+                height: "6px",
+                background:
+                  i === current ? "hsl(42 70% 55%)" : "hsl(42 70% 55% / 0.35)",
+              }}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ─── Card ─── */
 function ProjectCard({
   project,
@@ -220,7 +301,7 @@ function ProjectCard({
 
   return (
     <div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card ring-1 ring-border/20 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[3px] hover:border-accent/50 hover:ring-accent/20 hover:shadow-lg hover:shadow-accent/10 ${
+      className={`group relative flex flex-col break-inside-avoid overflow-hidden rounded-2xl border border-border/60 bg-card ring-1 ring-border/20 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-[3px] hover:border-accent/50 hover:ring-accent/20 hover:shadow-lg hover:shadow-accent/10 ${
         animate ? (visible ? "animate-fade-up" : "opacity-0 translate-y-6") : ""
       }`}
       style={{
@@ -229,18 +310,6 @@ function ProjectCard({
         boxShadow: "inset 0 1px 0 0 hsl(var(--border) / 0.15)",
       }}
     >
-      {project.image && (
-        <div className="mb-5 overflow-hidden rounded-xl border border-border/50 bg-black/20">
-          <Image
-            src={project.image}
-            alt={project.imageAlt || `${project.title} photo`}
-            width={1200}
-            height={675}
-            className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-        </div>
-      )}
-
       {/* top-edge highlight */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-[60%] -translate-x-1/2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -272,6 +341,11 @@ function ProjectCard({
           className={`pointer-events-none absolute h-4 w-4 border-accent/30 transition-all duration-300 group-hover:border-accent/70 group-hover:h-5 group-hover:w-5 ${pos}`}
         />
       ))}
+
+      {/* optional slideshow */}
+      {project.images && project.images.length > 0 && (
+        <Slideshow images={project.images} staggerIndex={index} />
+      )}
 
       {/* title */}
       <h3 className="mb-2 font-display text-xl font-bold leading-tight text-foreground">
@@ -323,7 +397,6 @@ function ProjectCard({
       {/* divider + action links */}
       {project.links.length > 0 && (
         <>
-          {/* divider matching heroes style */}
           <div className="mb-4 flex w-full items-center gap-1.5">
             <div
               className="h-px flex-1"
@@ -373,7 +446,6 @@ export function ProjectsSection() {
 
   const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
 
-  /* ── IntersectionObserver — trigger entrance once ── */
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
@@ -397,7 +469,6 @@ export function ProjectsSection() {
       id="projects"
       className="relative overflow-hidden px-6 pt-16 pb-28"
     >
-      {/* top separator — gold glow line */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2"
         style={{
@@ -419,8 +490,7 @@ export function ProjectsSection() {
           that shifted our world&apos;s axis.
         </p>
 
-        {/* grid */}
-        <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
+        <div ref={gridRef} className="columns-1 md:columns-2 gap-6 [&>*]:mb-6">
           {visible.map((project, i) => (
             <ProjectCard
               key={project.title}
@@ -432,11 +502,7 @@ export function ProjectsSection() {
           ))}
         </div>
 
-        {/* view more */}
         <div className="mt-16 text-center">
-          <p className="mb-4 text-sm text-muted-foreground/50">
-            Want to see more or collaborate with us?
-          </p>
           <button
             onClick={() => setShowAll((prev) => !prev)}
             className="group inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-6 py-3 font-medium text-accent transition-all duration-300 hover:border-accent/50 hover:bg-accent/10"

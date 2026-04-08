@@ -41,7 +41,8 @@ function pad(n: number) {
 /* ─── Component ─── */
 export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
   const [current, setCurrent] = useState(0);
-  const [timeLeft, setTimeLeft] = useState<ReturnType<typeof getTimeLeft>>(null);
+  const [timeLeft, setTimeLeft] =
+    useState<ReturnType<typeof getTimeLeft>>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const multiSlide = slides.length > 1;
@@ -92,7 +93,10 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
           <div
             key={slide.src}
             className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-            style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+            style={{
+              opacity: i === current ? 1 : 0,
+              zIndex: i === current ? 1 : 0,
+            }}
           >
             <Image
               src={slide.src}
@@ -184,9 +188,6 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
         <div className="flex flex-col items-start justify-between gap-4 px-6 py-5 sm:flex-row sm:items-center sm:gap-6 sm:px-8 sm:py-6">
           {/* Left — event info */}
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/5 text-sm">
-              ⬡
-            </div>
             <div>
               <p className="mb-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-accent">
                 Next Quest
@@ -215,7 +216,10 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
                   { label: "Min", value: pad(timeLeft.minutes) },
                   { label: "Sec", value: pad(timeLeft.seconds) },
                 ].map((unit, i) => (
-                  <div key={unit.label} className="flex items-center gap-2 sm:gap-3">
+                  <div
+                    key={unit.label}
+                    className="flex items-center gap-2 sm:gap-3"
+                  >
                     <div className="flex flex-col items-center">
                       <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-card/80 font-display text-lg font-bold tabular-nums text-foreground sm:h-14 sm:w-14 sm:text-xl">
                         {unit.value}
@@ -240,7 +244,10 @@ export function EventSlideshow({ slides, upcomingEvent }: EventSlideshowProps) {
                   { label: "Min", value: "--" },
                   { label: "Sec", value: "--" },
                 ].map((unit, i) => (
-                  <div key={unit.label} className="flex items-center gap-2 sm:gap-3">
+                  <div
+                    key={unit.label}
+                    className="flex items-center gap-2 sm:gap-3"
+                  >
                     <div className="flex flex-col items-center">
                       <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-card/80 font-display text-lg font-bold tabular-nums text-muted-foreground sm:h-14 sm:w-14 sm:text-xl">
                         {unit.value}

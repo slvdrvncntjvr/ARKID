@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { Gamepad2, Users, Rocket } from "lucide-react";
 
 const stats = [
-  { icon: Users, label: "Members", value: "500+" },
-  { icon: Gamepad2, label: "Projects", value: "13+" },
+  { icon: Users, label: "Members", value: "100+" },
+  { icon: Gamepad2, label: "Projects", value: "5+" },
   { icon: Rocket, label: "Game Jams", value: "3+" },
 ];
 
@@ -82,14 +82,15 @@ export function HeroSection() {
           </h1>
 
           {/* subtitle */}
-          <p 
+          <p
             className="max-w-lg text-base font-semibold leading-relaxed text-white sm:text-lg"
             style={{
               textShadow:
                 "0 0 20px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.8), -2px -2px 0 rgba(0, 0, 0, 0.6), 2px -2px 0 rgba(0, 0, 0, 0.6), -2px 2px 0 rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0, 0, 0, 0.6)",
             }}
           >
-            Embark on epic quests, forge legendary games, and join the ultimate developer guild
+            Embark on epic quests, forge legendary games, and join the ultimate
+            developer guild
           </p>
 
           {/* buttons */}
