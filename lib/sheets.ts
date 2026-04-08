@@ -24,9 +24,25 @@ export async function getGoogleSheetsClient() {
   return google.sheets({ version: "v4", auth });
 }
 
+export async function getGoogleSheetsWriteClient() {
+  const clientEmail = getRequiredEnv("GOOGLE_SHEETS_CLIENT_EMAIL");
+  const privateKey = getRequiredEnv("GOOGLE_SHEETS_PRIVATE_KEY").replace(
+    /\\n/g,
+    "\n",
+  );
+
+  const auth = new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  return google.sheets({ version: "v4", auth });
+}
+
 /**
- * Fetches all worksheet/tab names from the spreadsheet.
- * Returns them in order, with "MEMBERS" prioritised first (if it exists).
+ * Returns the specific members tab to use for member lookup.
+ * Defaults to "ALL MEMBERS" but can be overridden with MEMBERS_SHEET_NAME.
  */
 async function getAllSheetNames(
   sheets: sheets_v4.Sheets,
@@ -40,12 +56,15 @@ async function getAllSheetNames(
   const sheetTitles =
     meta.data.sheets?.map((s) => s.properties?.title ?? "") ?? [];
 
-  // Only use the ALL MEMBERS tab
-  const allMembersTab = sheetTitles.filter(
-    (title) => title.toUpperCase() === "ALL MEMBERS",
+  const targetMembersTab =
+    (process.env.MEMBERS_SHEET_NAME || "ALL MEMBERS").trim().toUpperCase();
+
+  // Only use one configured tab for member search.
+  const selectedTab = sheetTitles.filter(
+    (title) => title.toUpperCase() === targetMembersTab,
   );
 
-  return allMembersTab;
+  return selectedTab;
 }
 
 export interface UserRecord {

@@ -1,6 +1,21 @@
 import Image from "next/image";
 import { Mail, MapPin, Facebook, Users, Heart } from "lucide-react";
 
+const builders = [
+  {
+    name: "Salvador Vincent Javier",
+    role: "Full-Stack Software Developer",
+  },
+  {
+    name: "Franz Emmanuel Baes",
+    role: "Full-stack Software Developer",
+  },
+  {
+    name: "Precious Manucom",
+    role: "Software Developer, Product Experience",
+  },
+];
+
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-border/40 bg-gradient-to-b from-background to-background/50 px-6 py-16">
@@ -84,6 +99,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#games" className="text-sm text-muted-foreground">
+                  Games
+                </a>
+              </li>
+              <li>
                 <a href="#id-finder" className="text-sm text-muted-foreground">
                   ID Finder
                 </a>
@@ -124,6 +144,29 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div className="mb-10 rounded-2xl border border-border/50 bg-card/40 px-5 py-5 backdrop-blur-sm sm:px-6">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h4 className="text-sm font-bold uppercase tracking-wider text-foreground">
+              Built by
+            </h4>
+            <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+              Core Website Team
+            </span>
+          </div>
+
+          <div className="grid gap-2 sm:grid-cols-3">
+            {builders.map((builder) => (
+              <div
+                key={builder.name}
+                className="rounded-xl border border-border/60 bg-background/40 px-3 py-2.5"
+              >
+                <p className="text-sm font-semibold text-foreground">{builder.name}</p>
+                <p className="text-xs text-muted-foreground">{builder.role}</p>
+              </div>
+            ))}
           </div>
         </div>
 

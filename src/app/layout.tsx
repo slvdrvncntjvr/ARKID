@@ -17,9 +17,12 @@ export const metadata: Metadata = {
   description:
     "ARK is a student game development community. We collaborate, create games, and grow together. Come build with us.",
   icons: {
-    icon: "/branding/site-icon.jpg",
-    shortcut: "/branding/site-icon.jpg",
-    apple: "/branding/site-icon.jpg",
+    icon: [
+      { url: "/ark-logo.png", type: "image/png", sizes: "32x32" },
+      { url: "/ark-logo.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: [{ url: "/ark-logo.png", type: "image/png" }],
+    apple: [{ url: "/ark-logo.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     title: "ARK | Student Game Dev Community",
@@ -27,10 +30,10 @@ export const metadata: Metadata = {
       "ARK is a student game development community. We collaborate, create games, and grow together. Come build with us.",
     images: [
       {
-        url: "/branding/site-icon.jpg",
+        url: "/ark.png",
         width: 1200,
-        height: 1200,
-        alt: "ARK website icon",
+        height: 630,
+        alt: "ARK community banner",
       },
     ],
   },
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
     title: "ARK | Student Game Dev Community",
     description:
       "ARK is a student game development community. We collaborate, create games, and grow together. Come build with us.",
-    images: ["/branding/site-icon.jpg"],
+    images: ["/ark.png"],
   },
 };
 
