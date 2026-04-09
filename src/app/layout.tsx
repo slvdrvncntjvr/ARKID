@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Cinzel } from "next/font/google";
 import { FirefliesBackground } from "@/components/fireflies-background";
+import { InitialLoadOverlay } from "@/components/initial-load-overlay";
 
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
         className={`${dmSans.variable} ${cinzel.variable} font-sans antialiased`}
       >
         <FirefliesBackground count={35} />
+        <InitialLoadOverlay />
         {children}
       </body>
     </html>
