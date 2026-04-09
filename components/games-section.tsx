@@ -5,7 +5,7 @@ import { Rocket } from "lucide-react";
 
 const imagesBySlot = [
   [
-    "/games/bangungot/bangungotTitle.png",
+    "/games/bangungot/BangungotTitle.png",
     "/games/bangungot/bangungotPreview1.png",
     "/games/bangungot/bangungotPreview2.png",
   ],

@@ -11,8 +11,9 @@ interface LoginPageProps {
 }
 
 export default async function CertificatesLoginPage({ searchParams }: LoginPageProps) {
+  const fallbackSearchParams: Record<string, string | string[] | undefined> = {};
   const [resolved] = await Promise.all([
-    searchParams ? searchParams : Promise.resolve({}),
+    searchParams ? searchParams : Promise.resolve(fallbackSearchParams),
     waitForLoadingWindow(),
   ]);
   const errorRaw = resolved.error;
