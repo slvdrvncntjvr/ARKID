@@ -46,7 +46,6 @@ const projects: Project[] = [
     title: "CCIS Week Booth",
     type: "Booth",
     images: [
-      "/projects/arkBooth.jpg",
       "/projects/arkBooth2.jpg",
       "/projects/arkBooth3.jpg",
     ],

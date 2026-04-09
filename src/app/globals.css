@@ -6,6 +6,71 @@
     .text-balance {
         text-wrap: balance;
     }
+
+    .skeleton-wave {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .skeleton-wave::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+            100deg,
+            transparent 0%,
+            hsl(0 0% 100% / 0.08) 45%,
+            transparent 75%
+        );
+        animation: skeleton-slide 1.4s ease-in-out infinite;
+    }
+
+    .shimmer-track {
+        animation: track-slide 1.9s ease-in-out infinite;
+    }
+
+    .pulse-soft {
+        animation: pulse-soft 1.8s ease-in-out infinite;
+    }
+}
+
+@keyframes skeleton-slide {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes track-slide {
+    0% {
+        transform: translateX(-60%);
+    }
+    50% {
+        transform: translateX(15%);
+    }
+    100% {
+        transform: translateX(90%);
+    }
+}
+
+@keyframes pulse-soft {
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-wave::after,
+    .shimmer-track,
+    .pulse-soft {
+        animation: none;
+    }
 }
 
 @layer base {
