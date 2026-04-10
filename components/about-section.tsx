@@ -10,7 +10,7 @@ const slides = [
     date: "December 11, 2025 · 40+ participants",
   },
   {
-    src: "/projects/arkBooth.jpg",
+    src: "/projects/arkBooth2.jpg",
     alt: "CCIS Week Booth",
     caption: "CCIS Week Booth",
     date: "December 12, 2025",
